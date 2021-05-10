@@ -1,0 +1,15 @@
+import type React from 'react';
+
+{{#with (properCase name) as | Name |}}
+export interface {{Name}}Props {
+  required: any;
+  optional?: any;
+}
+
+const {{Name}} = ({ required, optional="defaultValue" }: {{Name}}Props) => {
+
+  return <div>{{Name}}</div>
+}
+
+export default {{Name}}
+{{/with}}

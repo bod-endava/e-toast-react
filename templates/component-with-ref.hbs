@@ -1,0 +1,28 @@
+import React from 'react';
+
+{{#with (properCase name) as | Name |}}
+interface {{Name}}PropsWithoutRef {
+  required: any;
+  optional?: any;
+  {{../element}}Props?: React.ComponentPropsWithoutRef<"{{../element}}">
+}
+
+export type {{Name}}Props = {{Name}}PropsWithoutRef & {
+  /**
+   * Ref to the inner {{../element}} component
+   */
+  ref?: React.ForwardedRef<HTML{{properCase ../element}}Element>;
+}
+export type {{Name}}InnerElement = HTML{{properCase ../element}}Element
+
+const {{Name}} = React.forwardRef<{{Name}}InnerElement, {{Name}}PropsWithoutRef>(({ 
+  required, 
+  optional="defaultValue",
+  {{../element}}Props={}
+}, ref) => {
+
+  return <{{../element}}>{{Name}}</{{../element}}>
+})
+
+export default {{Name}}
+{{/with}}

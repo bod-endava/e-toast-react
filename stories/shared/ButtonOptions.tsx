@@ -1,0 +1,1 @@
+export const ButtonVariants = ["primary" , "outline" , "cta" , "text" , "icon"]
