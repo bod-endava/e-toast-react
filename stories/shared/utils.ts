@@ -26,7 +26,16 @@ export const extendControl = (control: any, ...extensions: any[]) => {
 }
 export const description = (description: string) => ({ description })
 export const options = (options: any[]) => ({ options });
-export const labels = (labels: { [x:string]: string }) => (base: StorybookControl) => ({ ...base, control: { ...base.control, labels } })
+export const labels = (labels: { [x:string]: string }) => (base: StorybookControl) => ({ 
+  ...base ?? {}, 
+  control: { 
+    ...base.control ?? {}, 
+    labels: {
+      ...base.control.labels ?? {},
+      ...labels
+    } 
+  } 
+})
 export const optionsWithDefaultLabel = (_options: any[]) => (base: StorybookControl) => {
   return extendControl(
     base,
