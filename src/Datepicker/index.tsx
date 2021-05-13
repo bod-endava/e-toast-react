@@ -1,7 +1,17 @@
 import getClassName from 'getclassname';
 import React, { useMemo, useRef, useState } from 'react';
 import { useClickOutsideDetector } from './date-hooks';
-import { defaultMonthNames, defaultWeekdayNames, getCellData, parseDateWith, ValueCell, DateFormatter, defualtFormat, dateFormatterOf, Type, compose } from './date-utils';
+import { 
+  defaultMonthNames, 
+  defaultWeekdayNames, 
+  getCellData, 
+  parseDateWith, 
+  ValueCell, 
+  DateFormatter, 
+  defualtFormat, 
+  dateFormatterOf, 
+  compose 
+} from './date-utils';
 
 export type MonthMapper = string[] | ((n: number) => string);
 export type WeekdayMapper = string[] | ((n: number) => string);

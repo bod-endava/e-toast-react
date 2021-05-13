@@ -43,16 +43,13 @@ export const getCellData = (today: Date, weekdayNames: (n: number) => string ): 
     return weekdays.concat(beforePadding).concat(days).concat(afterPadding);
 }
 
-export const Type = Symbol("Type")
 type Either<L,R> = {
-  [Type]: string;
   map<U>(fn: (r: R) => U): Either<L,U>;
   onLeft<U>(fn: (l: L) => U): U | R;
 }
 
 
 const Right = <L,R>(x: R): Either<L,R> => ({
-  [Type]: "Right",
   map<U>(fn: (x: R) => U){
     return Right(fn(x))
   },
@@ -62,7 +59,6 @@ const Right = <L,R>(x: R): Either<L,R> => ({
 })
 
 const Left = <L,R>(x: L): Either<L,R> => ({
-  [Type]: "Left",
   map(){
     return Left(x)
   },
