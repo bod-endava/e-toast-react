@@ -1,12 +1,26 @@
 import { Meta, Story } from '@storybook/react';
 import Datepicker, { DatepickerProps } from '../src/Datepicker'
-import { defaultMonthNames, defaultWeekdayNames } from '../src/Datepicker/date-utils';
-import { extendControl, labels, noControl, objectControl, radioWithOptional } from './shared/utils';
+import { 
+  labels, 
+  noControl, 
+  textControl,
+  objectControl, 
+  extendControl, 
+  booleanControl, 
+  disableControl, 
+  radioWithOptional
+} from './shared/utils';
 
 const argTypes = {
+  initialValue: textControl(),
+  id: textControl(),
+  name: textControl(),
+  label: textControl(),
+  disabled: booleanControl(),
   weekdays: objectControl(),
   months: objectControl(),
-  formatDate: noControl(),
+  format: textControl(),
+  placeholder: textControl(),
   onChange: noControl(),
   inputProps: objectControl()
 }
@@ -18,10 +32,7 @@ export default {
 const Template: Story<DatepickerProps> = (args) => <Datepicker {...args} />;
 
 export const Default = Template.bind({})
-Default.args = {
-  weekdays: defaultWeekdayNames,
-  months: defaultMonthNames,
-}
+Default.args = {}
 Default.argTypes = argTypes
 
 export const ChangeNames = Template.bind({})
@@ -36,32 +47,33 @@ ChangeNames.args = {
 }
 ChangeNames.argTypes = argTypes
 
-export const CustomFormatter: Story<{ formatter: string } & DatepickerProps> = ({ formatter, ...args }) => {
-  const padded = x => x < 10 ? `0${x}` : `${x}`
-  const formatDate = {
-    "DD/MM/YY": (d: Date) => `${padded(d.getDate())}/${padded(d.getMonth() + 1)}/${d.getFullYear()%100}`,
-    "MM/DD/YY": (d: Date) => `${padded(d.getMonth() + 1)}/${padded(d.getDate())}/${d.getFullYear()%100}`, 
-    "DD/MM/YYYY": (d: Date) => `${padded(d.getDate())}/${padded(d.getMonth() + 1)}/${d.getFullYear()}`,
-    "YYYY-MM-DD": (d: Date) => `${d.getFullYear()}-${padded(d.getMonth() + 1)}-${padded(d.getDate())}`
-  }[formatter]
-  return <Datepicker formatDate={formatDate} {...args} />
-}
+export const WithInitialValue = Template.bind({})
+WithInitialValue.args = { initialValue: new Date }
+WithInitialValue.argTypes = argTypes
 
-CustomFormatter.parameters = { controls: { include: ['formatter'] } };
+export const WithLabel = Template.bind({})
+WithLabel.args = { label: "With Label" }
+WithLabel.argTypes = argTypes
+
+export const CustomFormatter: Story<DatepickerProps> = (args) => <Datepicker {...args} />
+CustomFormatter.args = {}
+CustomFormatter.parameters = { controls: { include: ['format','onChange'] } };
 CustomFormatter.argTypes = {
-  formatter: extendControl(
-    radioWithOptional([ "DD/MM/YY", "MM/DD/YY", "DD/MM/YYYY", "YYYY-MM-DD" ]),
+  format: extendControl(
+    radioWithOptional([ "DD/MM/YY", "MM/DD/YY", "DD/MM/YYYY", "YYYY-MM-DD", "Year: YYYY", "YYYYy MMm DDd" ]),
     labels({
-      undefined: `No Formatter (undefined)`,
-      "DD/MM/YY": `(Date) => DD/MM/YY`, 
-      "MM/DD/YY": `(Date) => MM/DD/YY`, 
-      "DD/MM/YYYY": `(Date) => DD/MM/YYYY`,
-      "YYYY-MM-DD": `(Date) => YYYY-MM-DD`,
+      undefined: `No Formatter (undefined, defaults to DD/MM/YY)`,
     })
   ),
-  weekdays: { control: { disable: true }},
-  months: { control: { disable: true }},
-  formatDate: { control: { disable: true }},
-  onChange: { control: { disable: true }},
-  inputProps: { control: { disable: true }},
+  id: textControl(),
+  name: textControl(),
+  label: textControl(),
+  disabled: booleanControl(),
+  onChange: noControl(),
+  initialValue: disableControl(),
+  placeholder: disableControl(),
+  weekdays: disableControl(),
+  months: disableControl(),
+  formatDate: disableControl(),
+  inputProps: disableControl(),
 }
