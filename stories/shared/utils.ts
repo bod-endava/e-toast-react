@@ -15,6 +15,7 @@ export const booleanControl = simpleControl("boolean")
 export const objectControl = simpleControl("object")
 export const noControl = simpleControl(null)
 export const numberControl = simpleControl("number");
+export const disableControl = () => ({ control: { disable: true }})
 
 const mergeControl = (control: any, extension: any) => {
   const extract = (fn: any,...args: any[]) => typeof fn === "function" ? fn(...args) : fn
@@ -26,7 +27,16 @@ export const extendControl = (control: any, ...extensions: any[]) => {
 }
 export const description = (description: string) => ({ description })
 export const options = (options: any[]) => ({ options });
-export const labels = (labels: { [x:string]: string }) => (base: StorybookControl) => ({ ...base, control: { ...base.control, labels } })
+export const labels = (labels: { [x:string]: string }) => (base: StorybookControl) => ({ 
+  ...base ?? {}, 
+  control: { 
+    ...base.control ?? {}, 
+    labels: {
+      ...base.control.labels ?? {},
+      ...labels
+    } 
+  } 
+})
 export const optionsWithDefaultLabel = (_options: any[]) => (base: StorybookControl) => {
   return extendControl(
     base,

@@ -7,4 +7,11 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  options: {
+    storySort: {
+      method: "",
+      order: ["@e-toast",["Button","Checkbox","FlexLayout","Datepicker","NativeDatepicker"]],
+      locale: ""
+    }
+  }
 }
