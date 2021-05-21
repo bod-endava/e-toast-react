@@ -54,4 +54,4 @@ export const Icons = [
 , "trash"
 , "share"
 , "mail"
-, "lock"]
+, "lock"].sort()

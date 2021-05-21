@@ -66,6 +66,13 @@ export const radioWithOptional = (options: any[]): StorybookControl => {
   )
 }
 
+export const inlineRadioWithOptional = (options: any[]): StorybookControl => {
+  return extendControl(
+    simpleControl("inline-radio"),
+    optionsWithDefaultLabel(options)
+  )
+}
+
 /**
  * Create an array from `start` (inclusive) to `end` (exclusive) by means of adding `step`
  * @param start where to start (Inclusive)

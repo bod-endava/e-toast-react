@@ -10,8 +10,17 @@ export const parameters = {
   options: {
     storySort: {
       method: "",
-      order: ["@e-toast",["Button","Checkbox","FlexLayout","Datepicker","NativeDatepicker"]],
-      locale: ""
+      order: [
+        "@e-toast",
+        [
+          "Button",
+          "Checkbox",
+          "TextField",
+          "FlexLayout",
+          "Datepicker",
+          "NativeDatepicker"
+        ]
+      ],
     }
   }
 }
