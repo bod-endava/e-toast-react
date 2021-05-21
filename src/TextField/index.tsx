@@ -4,15 +4,15 @@ import { Icons } from '../sharedTypes';
 
 interface TextFieldPropsWithoutRef {
   /**
-   * id attribute to be passed to the underlying input element. Will default to `name`, then `label` props
+   * The `id` attribute to be passed to the underlying input element. Will default to `name`, then `label` props
    */
   id?: string;
   /**
-   * label attribute to be passed to the underlying input element
+   * The `label` attribute to be passed to the underlying input element
    */
   label?: string;
   /**
-   * name attribute to be passed to the underlying input element. Will default to `id`, then `label` props
+   * The `name` attribute to be passed to the underlying input element. Will default to `id`, then `label` props
    */
   name?: string;
   /**
@@ -36,7 +36,7 @@ interface TextFieldPropsWithoutRef {
    */
   inputProps?: React.ComponentPropsWithoutRef<"input">;
   /**
-   * placeholder attribute to be passed to the underlying input element
+   * The `placeholder` attribute to be passed to the underlying input element
    */
   placeholder?: string;
   /**
