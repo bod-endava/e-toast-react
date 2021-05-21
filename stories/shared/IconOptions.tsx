@@ -1,4 +1,10 @@
+/**
+ * Possible size values
+ */
 export const Sizes = [ "small"]
+/**
+ * Possible icon values. Sorted alphabetically ascending
+ */
 export const Icons = [
  "chevron"
 , "arrow"
@@ -54,4 +60,4 @@ export const Icons = [
 , "trash"
 , "share"
 , "mail"
-, "lock"]
+, "lock"].sort()
