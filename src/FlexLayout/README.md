@@ -2,7 +2,7 @@
 
 <hr>
 
-This is where the description will go
+A component that works as a flex container
 
 #### Import
 

@@ -16,6 +16,7 @@ export const objectControl = simpleControl("object")
 export const noControl = simpleControl(null)
 export const numberControl = simpleControl("number");
 export const disableControl = () => ({ control: { disable: true }})
+export const colorControl = simpleControl("color");
 
 const mergeControl = (control: any, extension: any) => {
   const extract = (fn: any,...args: any[]) => typeof fn === "function" ? fn(...args) : fn
