@@ -1,5 +1,6 @@
 import getClassName from 'getclassname';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { ChangeEvent, useMemo, useRef, useState } from 'react';
+import { FormAPI } from '../Form';
 import { useClickOutsideDetector } from './date-hooks';
 import { 
   defaultMonthNames, 
@@ -84,7 +85,12 @@ interface DatepickerPropsWithoutRef {
   /**
    * placeholder to be used in the input
    */
-  placeholder?: string
+  placeholder?: string;
+  /**
+   * **This prop is only used for automatic form handling should not be used directly**
+   * Form API object used to hook input to form state. Normally, this prop is passed automatically by the form.
+   */
+  formAPI?: FormAPI<any>;
 }
 
 export type DatepickerProps = DatepickerPropsWithoutRef & {
@@ -108,6 +114,7 @@ const Datepicker = React.forwardRef<DatepickerInnerElement, DatepickerPropsWitho
   weekdays: rawWeekdays = defaultWeekdayNames,
   months: rawMonths = defaultMonthNames,
   format: rawFormat = defualtFormat,
+  formAPI,
   onChange = () => {},
   inputProps = {},
   initialValue: rawInit,
@@ -123,10 +130,13 @@ const Datepicker = React.forwardRef<DatepickerInnerElement, DatepickerPropsWitho
 
   const [ temporalDate, setTemporalDate ] = useState(initialValue ?? new Date);
   const [ selectedDate, rawSetSelectedDate ] = useState(initialValue === undefined ? "" : formatDate(initialValue));
+
+  const wrapValue = (value: string, name: string) => ({ target: { type: "date", value, name } } as unknown as ChangeEvent);
   
   const setSelectedDate = (d: Date) => {
     rawSetSelectedDate(formatDate(d))
     setTemporalDate(d)
+    formAPI?.handleChange?.(wrapValue(formatDate(d),(name || id || label) as string));
     onChange(formatDate(d),d)
   }
 
@@ -142,6 +152,7 @@ const Datepicker = React.forwardRef<DatepickerInnerElement, DatepickerPropsWitho
     parseDate(e.target.value)
     .map(setSelectedDate)
     .onLeft(str => {
+      formAPI?.handleChange?.(wrapValue(str,(name || id || label) as string))
       onChange(str)
       rawSetSelectedDate(str)
     })

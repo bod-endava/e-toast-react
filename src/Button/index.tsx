@@ -1,6 +1,7 @@
 import React from 'react';
 import getClassName from 'getclassname';
 import { Icons, Sizes } from "../sharedTypes"
+import { FormAPI } from '../Form';
 
 export type ButtonVariants = "primary" | "outline" | "cta" | "text" | "icon"
 
@@ -17,6 +18,17 @@ interface ButtonPropsWithoutRef {
    * Whether the button is disabled
    */
   disabled?: boolean;
+  /**
+   * **This prop is only used for automatic form handling**
+   * Type of button used to decide how to hook button to form state. Defaults to submit.
+   * Passing none will prevent the button from triggering a form event.
+   */
+  type?: "submit" | "reset" | "none";
+  /**
+   * **This prop is only used for automatic form handling should not be used directly**
+   * Form API object used to hook button to form state. Normally, this prop is passed automatically by the form.
+   */
+  formAPI?: FormAPI<any>;
   /**
    * Optional icon
    */
@@ -52,11 +64,21 @@ const Button: React.FC<ButtonProps> = React.forwardRef<ButtonInnerElement, Butto
   children,
   icon,
   size,
+  type="submit",
+  formAPI,
   variant="primary",
   disabled=false,
   buttonProps={},
   onClick=()=>{}
 }, ref) => {
+
+  const handleClick = (e) => {
+    e?.preventDefault?.();
+    if( type !== "none" ){
+      type === "submit" ? formAPI?.handleSubmit?.(e) : formAPI?.handleReset?.(e)
+    }
+    onClick(e);
+  }
 
   const cl = getClassName({
     base: `eds-${variant}-button`,
@@ -64,7 +86,7 @@ const Button: React.FC<ButtonProps> = React.forwardRef<ButtonInnerElement, Butto
     [`icon-${icon}`]: Boolean(icon),
   })
 
-  return <button ref={ref} className={cl} disabled={disabled} onClick={onClick} {...buttonProps} >
+  return <button ref={ref} className={cl} disabled={disabled} onClick={handleClick} {...buttonProps} >
     {label || children}
   </button>
 })

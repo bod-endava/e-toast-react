@@ -1,5 +1,6 @@
 import getClassName from 'getclassname';
 import React, { useState } from 'react';
+import { FormAPI } from '../Form';
 import { Icons } from '../sharedTypes';
 
 interface TextFieldPropsWithoutRef {
@@ -49,6 +50,11 @@ interface TextFieldPropsWithoutRef {
    */
   initialValue?: string;
   /**
+   * **This prop is only used for automatic form handling should not be used directly**
+   * Form API object used to hook input to form state. Normally, this prop is passed automatically by the form.
+   */
+  formAPI?: FormAPI<any>;
+  /**
    * onChange event handler. Triggers on every change
    */
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -78,6 +84,7 @@ const TextField = React.forwardRef<TextFieldInnerElement, TextFieldPropsWithoutR
   placeholder,
   value,
   initialValue,
+  formAPI,
   onChange,
   onIconClick,
 }, ref) => {
@@ -85,6 +92,7 @@ const TextField = React.forwardRef<TextFieldInnerElement, TextFieldPropsWithoutR
   const [innerValue, setInnerValue] = useState(initialValue)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    formAPI?.handleChange?.(e);
     onChange?.(e)
     !controlled && setInnerValue(e.target.value);
   }
