@@ -1,6 +1,6 @@
 import React from 'react';
 import getClassName from 'getclassname';
-import { FormAPI } from '../Form';
+import { FormAPI } from '../Form/API';
 
 interface CheckboxPropsWithoutRef {
   /**

@@ -1,6 +1,6 @@
 import getClassName from 'getclassname';
 import React, { useState } from 'react';
-import { FormAPI } from '../Form';
+import { FormAPI } from '../Form/API';
 import { Icons } from '../sharedTypes';
 
 interface TextFieldPropsWithoutRef {
@@ -36,6 +36,10 @@ interface TextFieldPropsWithoutRef {
    * Props to pass to the underlying input element
    */
   inputProps?: React.ComponentPropsWithoutRef<"input">;
+  /**
+   * Props to pass to the container of the input element
+   */
+  inputContainerProps?: React.ComponentPropsWithoutRef<"div">;
   /**
    * The `placeholder` attribute to be passed to the underlying input element
    */
@@ -81,6 +85,7 @@ const TextField = React.forwardRef<TextFieldInnerElement, TextFieldPropsWithoutR
   success=false,
   disabled=false,
   inputProps={},
+  inputContainerProps={},
   placeholder,
   value,
   initialValue,
@@ -122,7 +127,7 @@ const TextField = React.forwardRef<TextFieldInnerElement, TextFieldPropsWithoutR
   })
   const iconClass = `eds-icon ${icon} ${partialIconClass}`
 
-  return <div className={container}>
+  return <div className={container} {...inputContainerProps}>
     <div className={labelRoot}>
       {label && <label className={labelText} htmlFor={id || name || label}>
         {label}

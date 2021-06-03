@@ -1,6 +1,6 @@
 import getClassName from 'getclassname';
 import React, { ChangeEvent, useMemo, useRef, useState } from 'react';
-import { FormAPI } from '../Form';
+import { FormAPI } from '../Form/API';
 import { useClickOutsideDetector } from './date-hooks';
 import { 
   defaultMonthNames, 

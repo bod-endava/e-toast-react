@@ -231,11 +231,7 @@ Custom.parameters = {
   }
 }
 
-export const FieldContainerExample = ({ ...args }) => {
-  const initialValues = {
-    firstName: "Juan",
-    lastName: "",
-  }
+export const FieldContainerExample = ({ initialValues, ...args }) => {
   return <div>
     <p>
       Sometimes, you might need a component to group fields or for some style requirement.
@@ -283,8 +279,12 @@ export const FieldContainerExample = ({ ...args }) => {
   </div>
 }
 FieldContainerExample.storyName = "Field Containers"
-FieldContainerExample.args = {}
-
+FieldContainerExample.args = { 
+  initialValues : {
+    firstName: "Juan",
+    lastName: "",
+  }
+}
 FieldContainerExample.parameters = {
   docs: {
     source: {
@@ -322,6 +322,96 @@ FieldContainerExample.parameters = {
       +`\n  </FieldContainer>`
       +`\n  <Button label="Submit"/>`
       +`\n</Form>`
+    }
+  }
+}
+
+export const UsingHTML = ({ initialValues, ...args }) => {
+  return <>
+    <p>Using the manual approach there is no issue using HTML components or any weird components</p>
+    <p>The Form component can detect HTML inputs and hook them up to form state using the type prop to know how to connect it</p>
+    <Form
+      {...args}
+      initialValues={initialValues}
+    >
+      <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>
+        <label htmlFor="firstName">Name</label>
+        <input name="firstName" type="text"/>
+        <input type="submit" />
+      </FieldContainer>
+    </Form>
+  </>
+}
+UsingHTML.storyName = "Using HTML Form Components";
+UsingHTML.args = { initialValues: { firstName: "" } }
+UsingHTML.parameters = {
+  docs: {
+    source: {
+      code:
+       `<Form`
+      +`\n  {...args}`
+      +`\n  initialValues={initialValues}`
+      +`\n>`
+      +`\n  <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>`
+      +`\n    <label htmlFor="firstName">Name</label>`
+      +`\n    <input name="firstName" type="text"/>`
+      +`\n    <input type="submit" />`
+      +`\n  </FieldContainer>`
+      +`\n</Form>`
+    }
+  }
+}
+
+export const UsingFancy = ({ initialValues, ...args }) => {
+  const Fancy = ({ formAPI }: any) => {
+    return <div>
+      I'm a fancy form component. I can see the form state: {formAPI.getField("firstName")}
+    </div>
+  }
+  Fancy.toasty = true;
+
+  return <>
+    <p>Using the manual approach is recommended when using custom components</p>
+    <p>
+      For those who want to feel fancy and use automatic form state hook up feature, 
+      you can add a truthy "toasty" attribute to the component class or function to tell 
+      etoast to treat the component as an etoast form component and it will pass all the 
+      props it would pass to any other etoast form component
+    </p>
+    <Form
+      {...args}
+      initialValues={initialValues}
+    >
+      <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>
+        <Fancy />
+        <TextField name="firstName" label="Name" inputContainerProps={{ style: { marginTop: "16px" }}}/>
+        <Button type="submit" label="Submit" buttonProps={{ style: { marginTop: "8px" } }}/>
+      </FieldContainer>
+    </Form>
+  </>
+}
+UsingFancy.storyName = "Using Auto hooking for Custom Form Components";
+UsingFancy.args = { initialValues: { firstName: "" } }
+UsingFancy.parameters = {
+  docs: {
+    source: {
+      code:
+        `const Fancy = ({ formAPI }: any) => {`
+        +`\n  return <div>`
+        +`\n    I'm a fancy form component. I can see the form state: {formAPI.getField("firstName")}`
+        +`\n  </div>`
+        +`\n}`
+        +`\nFancy.toasty = true;\n`
+        +`\n<Form`
+        +`\n  {...args}`
+        +`\n  initialValues={initialValues}`
+        +`\n>`
+        +`\n  <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>`
+        +`\n    <Fancy />`
+        +`\n    <TextField name="firstName" label="Name" inputContainerProps={{ style: { marginTop: "16px" }}}/>`
+        +`\n    <Button type="submit" label="Submit" buttonProps={{ style: { marginTop: "8px" } }}/>`
+        +`\n  </FieldContainer>`
+        +`\n</Form>`
     }
   }
 }

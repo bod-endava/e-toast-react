@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FormAPI, FormAPIContext } from '../Form';
+import { FormAPI, FormAPIContext } from '../Form/API';
 
 export interface FieldContainerProps {
   /**

@@ -1,29 +1,17 @@
 import React, { useEffect, useMemo, useReducer } from 'react';
+import { FormAPI, FormAPIContext } from './API';
+import { 
+  isHTMLFormComponent, 
+  isToastFormComponent,
+  isButton,
+  isChangeable,
+  isCheckable,
+  getIdentifier, 
+  isFancyComponent
+} from './identifyChild'
 
-export interface EToastFormAPI<T> {
-  handleChange: (e: React.ChangeEvent<any>) => void;
-  handleSubmit: (e?: React.MouseEvent) => void;
-  handleReset: (e?: React.MouseEvent) => void;
-  setField: <K extends keyof T>(field: K, value: T[K]) => void;
-  getField: <K extends keyof T>(field: K) => T[K];
-  initialValues: T;
-  values: T;
-}
-
-export type FormAPI<T> = EToastFormAPI<T>;
-
-export const FormAPIContext = React.createContext({
-  formAPI: {
-    handleChange: () => undefined,
-    handleReset: () => undefined,
-    handleSubmit: () => undefined,
-    getField: () => undefined,
-    setField: () => undefined,
-    initialValues: {},
-    values: {}
-  } as EToastFormAPI<any>,
-  hookChild: x => x,
-})
+export type { FormAPI }
+export { FormAPIContext }
 
 export interface FormProps<T> {
   /**
@@ -89,14 +77,19 @@ const Form = <T,>({
     onSubmit(state);
   }
 
+  const handleReset = (e) => {
+    e?.preventDefault?.();
+    dispatch(reset())
+  }
+
   useEffect(() => onChange(state), [state]);
 
-  const API: EToastFormAPI<T> = {
-    handleSubmit: handleSubmit as () => void,
-    handleReset: () => dispatch(reset()),
+  const API: FormAPI<T> = {
+    handleSubmit,
+    handleReset,
     handleChange: (e: React.ChangeEvent<any>) => {
       const { name, id, value, type } = e.target;
-      if( type === "checkbox" ){
+      if( type === "checkbox" || type === "radio" ){
         dispatch(setField(name || id, e.target.checked));
       } else {
         dispatch(setField(name || id, value));
@@ -110,24 +103,44 @@ const Form = <T,>({
 
   function processChild(child) {
     const props: any = {};
-    const originalProps = (child as any)?.props;
-    if( originalProps?.name || originalProps?.id ){
-      const id = originalProps?.name || originalProps?.id;
+    const id = getIdentifier(child)
+    if( isHTMLFormComponent(child) ){
+      const type = child.props.type || (child.type === "button" ? "button" : "text")
+      if( isCheckable(type) ){
+        if( id in state ){
+          props.checked = Boolean(state[id]);
+        }
+        props.onChange = (e: any) => API.setField(id,e.target.checked);
+      }
+      if( isButton(type) ){
+        switch(type){
+          case "reset":
+            props.onClick = API.handleReset
+            break;
+          case "submit":
+            props.onClick = API.handleSubmit
+            break;
+        }
+      }
+      if( isChangeable(type) ){
+        if( id in state ){
+          props.value = state[id] || "";
+        }
+        props.onChange = API.handleChange
+      }
+    }
+    if( isToastFormComponent(child) || isFancyComponent(child) ){
+      props.value = state[id];
+      props.checked = state[id];
+      props.formAPI = API;
       if( id in initialValues ){
         props.initialValue = initialValues[id];
       }
-      props.value = state[id];
-      props.checked = state[id];
-    }
-    if( typeof child.type !== "string" ){
-      props.formAPI = API;
     }
     return React.cloneElement(child as any, props);
   }
 
-  const processChildren = (children: React.ReactNode): React.ReactNode => {
-    return React.Children.map(children, processChild);
-  };
+  const processChildren = (children: React.ReactNode): React.ReactNode => React.Children.map(children, processChild);
   const renderChildren = () => typeof children === "function" ? children(API) : processChildren(children);
 
   return <FormAPIContext.Provider value={{ formAPI: API, hookChild: processChild }}>
