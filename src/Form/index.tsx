@@ -15,26 +15,27 @@ export { FormAPIContext }
 
 export interface FormProps<T> {
   /**
-   * Change event handler
+   * Change event handler. The first argument is the state. The second argument is what field triggered the change
    */
-  onChange?: (values: T) => void;
+  onChange?: (values: T, trigger?: string) => void;
   /**
-   * Submit event handler
+   * Submit event handler. Receives the form state
    */
   onSubmit?: (values: T) => void;
   /**
    * Initial form values
    */
-  initialValues: T;
-  /**
-   * Form content to render. If React nodes are passed it will automatically hook immediate children components by passing the formAPI prop. 
-   * If it is a function, it will render the result of calling said function using formAPI as parameter
-   */
-  children: ((api: FormAPI<T>) => React.ReactNode) | React.ReactNode;
+  initialValues?: T;
   /**
    * Props to be passed to the underlying form component
    */
   formProps?: React.ComponentPropsWithoutRef<"form">;
+  /**
+   * Form content to render. If React nodes are passed it will automatically hook immediate compatible children components by 
+   * passing the value, checked, initialValue and formAPI as props. A child is detected as compatible if it is a etoast form component
+   * or if the type has the toasty attibute set to true. If it is a function, it will render the result of calling said function using formAPI as parameter
+   */
+  children?: ((api: FormAPI<T>) => React.ReactNode) | React.ReactNode;
 }
 
 type Key = string | number | symbol
@@ -45,33 +46,41 @@ type ResetAction = { type: "RESET" }
 
 type Action = SetAction | ResetAction;
 
-function createReducer<T>(init: T){ 
-  return (state: T, action: Action): T => {
+type StateType<T> = {
+  values: T;
+  trigger?: Key;
+}
+
+function createReducer<T>(init: StateType<T>){ 
+  return (state: StateType<T>, action: Action): StateType<T> => {
     switch(action.type){
       case "SET":
         return {
-          ...state,
-          [action.field]: action.value
+          values: {
+            ...state.values,
+            [action.field]: action.value
+          },
+          trigger: action.field,
         }
       case "RESET":
         return { ...init };
     }
   }
-}
+} 
 
 const setField = (field: Key, value: any) => ({ type: "SET" as "SET", field, value })
 const reset = (): ResetAction => ({ type: "RESET" });
 
-const Form = <T,>({
-  initialValues,
+const Form = <T extends {}>({
   children,
   formProps={},
+  initialValues={} as T,
   onSubmit=()=>{},
   onChange=()=>{}
 }: FormProps<T>) => {
-
-  const reducer = useMemo(() => createReducer(initialValues),[]);
-  const [state, dispatch] = useReducer(reducer,initialValues);
+  const init: StateType<T> = { values: initialValues, trigger: undefined }
+  const reducer = useMemo(() => createReducer(init),[]);
+  const [{ values: state, trigger }, dispatch] = useReducer(reducer,init);
   const handleSubmit = (e) => {
     e?.preventDefault?.();
     onSubmit(state);
@@ -82,7 +91,7 @@ const Form = <T,>({
     dispatch(reset())
   }
 
-  useEffect(() => onChange(state), [state]);
+  useEffect(() => onChange(state, trigger as string), [state, trigger]);
 
   const API: FormAPI<T> = {
     handleSubmit,

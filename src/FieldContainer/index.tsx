@@ -7,14 +7,6 @@ export interface FieldContainerProps {
    */
   as?: React.ElementType<any>;
   /**
-   * Form API to hook children components to form state. Normally, this should be automatically passed by the Form component
-   */
-  formAPI?: FormAPI<any>;
-  /**
-   * Function to hook a child to the form state
-   */
-  hookChild?: (child: React.ReactNode) => React.ReactNode; 
-  /**
    * Props to be passed to the component used as container
    */
   componentProps?: any;
