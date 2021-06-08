@@ -38,7 +38,7 @@ export const Manual = ({ initialValues, ...args }: FormProps<typeof initialValue
         return <FlexLayout flexDirection="column">
           <TextField name="firstName" label="First Name" value={formAPI.getField("firstName")} onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>
           <TextField name="lastName" label="Last Name" value={formAPI.getField("lastName")} onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>
-          <Checkbox name="remember" label="Remember me" checked={formAPI.getField("remember")} onChange={formAPI.handleChange} />
+          <Checkbox name="remember" id="manual" label="Remember me" checked={formAPI.getField("remember")} onChange={formAPI.handleChange} />
           <Button label="Submit" onClick={formAPI.handleSubmit} buttonProps={{ style: { marginBottom: "16px" }}}/>
           <Button label="Reset" variant="cta" onClick={formAPI.handleReset} buttonProps={{ style: { marginBottom: "16px" }}}/>
           <div>
