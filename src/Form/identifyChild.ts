@@ -32,4 +32,4 @@ const isToastDatepicker = (type: any) => type === Datepicker;
 export const isToastFormComponent = ({type}: any) => or(isToastButton,isToastCheckbox,isToastTextField,isToastDatepicker)(type)
 export const isFancyComponent = (c: any) => Boolean(c?.type?.toasty);
 
-export const getIdentifier = (comp: any) => comp?.props?.name || comp?.prop?.id
+export const getIdentifier = (comp: any) => comp?.props?.name || comp?.props?.id
