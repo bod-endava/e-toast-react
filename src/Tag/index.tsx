@@ -1,13 +1,29 @@
-import type React from 'react';
+import React from 'react';
+import getClassName from 'getclassname';
 
 export interface TagProps {
-  required: any;
-  optional?: any;
+  disabled?: boolean;
+  id?: string;
+  label: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  tabIndex: string;
 }
 
-const Tag = ({ required, optional="defaultValue" }: TagProps) => {
+const Tag: React.FC<TagProps> = ((
+  {
+    label,
+  }
+) => {
+  const cl = getClassName({ base: "eds-tags" })
+  const clSuffix = cl.extend('&__tag')
 
-  return <div>Tag</div>
-}
+  return (
+    <div className={cl}>
+      <div className={clSuffix}>
+        {label}
+      </div>
+    </div>
+  )
+});
 
-export default Tag
+export default Tag;
