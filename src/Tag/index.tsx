@@ -1,26 +1,59 @@
 import React from 'react';
 import getClassName from 'getclassname';
 
-export interface TagProps {
-  disabled?: boolean;
-  id?: string;
+interface TagProps {
+  /**
+   * The `close` attribute to be passed to the create a tag element with close action
+   */
+  hasCloseAction: boolean;
+
+  /**
+   * Whether the tag is disabled
+   */
+  isDisabled?: boolean;
+
+
+  /**
+   * The `label` attribute to be passed to the underlying tag element
+   */
   label: string;
+
+  /**
+   * The `onClick` attribute to be passed to the underlying tag element
+   */
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  tabIndex: string;
+
+  /**
+   * Optional props to pass to the underlying tag component
+   */
+  tagProps?: React.ComponentPropsWithoutRef<"div">;
 }
 
 const Tag: React.FC<TagProps> = ((
   {
+    isDisabled = false,
+    hasCloseAction = false,
     label,
-  }
+    onClick = () => {},
+    tagProps = {},
+  }: TagProps
 ) => {
-  const cl = getClassName({ base: "eds-tags" })
-  const clSuffix = cl.extend('&__tag')
+  const clTag = getClassName({
+    base: "eds-tags",
+  })
+
+  const clCloseAction = getClassName({
+    base: "eds-icon",
+    [`close`]: Boolean(hasCloseAction),
+  })
+
+  const clSuffix = clTag.extend('&__tag');
 
   return (
-    <div className={cl}>
-      <div className={clSuffix}>
+    <div className={clTag}>
+      <div className={clSuffix} disabled={isDisabled} {...tagProps}>
         {label}
+        <span className={clCloseAction} onClick={onClick}  />
       </div>
     </div>
   )

@@ -16,6 +16,18 @@ Default.args = {
   label: "Tag",
 };
 
+export const TagWithCloseAction = Template.bind({});
+TagWithCloseAction.args = {
+  label: "Tag with close",
+  hasCloseAction: true,
+};
+
+export const TagDisabled = Template.bind({});
+TagDisabled.args = {
+  label: "Tag disabled",
+  isDisabled: true,
+};
+
 export const TagList = Template.bind({});
 
 TagList.args = {
