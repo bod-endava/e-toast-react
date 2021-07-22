@@ -2,7 +2,7 @@
 
 <hr>
 
-This is where the description will go
+A component that works as an HTML select element
 
 #### Import
 
@@ -15,7 +15,7 @@ import Select from '@e-toast/react/lib/Select';
 #### Usage
 
 ```jsx
-// Show me how to use it!
+<Select options={['Small','Medium','Large']}/>
 ```
 
 #### Local Type Definitions
@@ -27,6 +27,7 @@ import Select from '@e-toast/react/lib/Select';
 
 | Name       | Type   | Description                 |
 | ---------- | ------ | --------------------------- |
+| options   | `array` | List of elements Select will contain |
 
 #### Optional props
 
