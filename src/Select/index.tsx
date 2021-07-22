@@ -8,12 +8,12 @@ export interface SelectProps {
 const Select: React.FC<SelectProps> = ({options}) => {
 
   const [displayOptions,setDisplayOptions] = useState(false);
-  const [defaultOption, setDefaultOption] = useState(options[0].value);
+  const [defaultOption, setDefaultOption] = useState(options[0]);
   
   const onSelectClick = () => displayOptions ? setDisplayOptions(false) : setDisplayOptions(true);
 
   const onOptionSelected = (index) => {    
-    setDefaultOption(options[index].value);
+    setDefaultOption(options[index]);
     setDisplayOptions(false);
   }
 

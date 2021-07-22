@@ -18,15 +18,5 @@ const Template: Story<SelectProps> = (args) => <Select {...args}/>
 
 export const Default = Template.bind({});
 Default.args = {
-  options: {
-    0:{
-      value:'Small'
-    },
-    1:{
-      value:'Medium'
-    },
-    2:{
-      value:'Large'
-    }
-  }
+  options: ['Small', 'Medium', 'Large'] 
 };
