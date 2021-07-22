@@ -18,17 +18,17 @@ const Option: React.FC<OptionProps> = ({options, display, onSelected}) => {
   })
 
   const onClickOption = (event) => {   
-    onSelected(event.target.dataset.index);    
+    onSelected(event.target.dataset.index);        
   }
-
+  
   return(
-    <ul style={{visibility: display? 'visible' : 'hidden', border:'solid red'}}>     
+    <div className={display ? 'eds-select__list eds-select__list--open' : 'eds-select__list'}>     
       {        
         optionsArray.map((datos:data, index:number) => 
-          <li key={index} data-index={index} onClick={onClickOption}>{datos.value}</li>
+          <div key={index} className='eds-select__option' data-index={index} onClick={onClickOption}>{datos.value}</div>
         )
       }      
-    </ul>    
+    </div>    
   ) 
 }
 

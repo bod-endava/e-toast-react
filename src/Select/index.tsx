@@ -14,6 +14,7 @@ const Select: React.FC<SelectProps> = ({options}) => {
 
   const onOptionSelected = (index) => {    
     setDefaultOption(options[index].value);
+    setDisplayOptions(false);
   }
 
   return(
