@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import Option from './option';
 
+
 export interface SelectProps {
   /** 
   * Array with elements Select will display as a list
   */
-  options?: any
+  options?: any,
+   /**
+   * onChange event handler. Triggers when an option is selected
+   */
+    onChange: React.ChangeEventHandler<HTMLDivElement>
 }
 
-const Select: React.FC<SelectProps> = ({options}) => {
+const Select: React.FC<SelectProps> = ({
+  options,
+  onChange
+}) => {
 
   const [displayOptions,setDisplayOptions] = useState(false);
   const [defaultOption, setDefaultOption] = useState(options[0]);
@@ -18,9 +26,10 @@ const Select: React.FC<SelectProps> = ({options}) => {
     displayOptions ? setDisplayOptions(false) : setDisplayOptions(true);    
   }
 
-  const onOptionSelected = (index) => {    
-    setDefaultOption(options[index]);
+  const onOptionSelected = (event) => {    
+    setDefaultOption(options[event.target.dataset.index]);
     setDisplayOptions(false);
+    onChange(event);
   }
 
   useEffect(() => {
@@ -33,7 +42,11 @@ const Select: React.FC<SelectProps> = ({options}) => {
 
   return(
     <>
-      <div className={'eds-select eds-select__selected'}  onClick={onSelectClick}><span className='eds-select__selected__content'>{defaultOption}</span><span className='eds-select__selected__arrow'></span><span className={iconClass}></span></div>
+      <div className={'eds-select eds-select__selected'} onClick={onSelectClick}>
+        <p className='eds-select__selected__content' id='selectDefaultOption'>{defaultOption}</p>
+        <span className='eds-select__selected__arrow'></span>    
+        <span className={iconClass}></span>
+      </div>
       <Option options={options} display={displayOptions} onSelected={onOptionSelected}></Option>
     </>
     

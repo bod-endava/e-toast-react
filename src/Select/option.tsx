@@ -7,13 +7,13 @@ interface data{
 export interface OptionProps {
   options?: any,
   display?: boolean,
-  onSelected?: (index:number) => void
+  onSelected: React.ChangeEventHandler<HTMLDivElement>
 }
 
 const Option: React.FC<OptionProps> = ({options, display, onSelected}) => {
 
   const onClickOption = (event) => {   
-    onSelected(event.target.dataset.index);        
+    onSelected(event);        
   }
   
   return(

@@ -2,14 +2,16 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import Select, { SelectProps } from '../src/Select';
 import {
-    objectControl
+    objectControl,
+    noControl
 }from './shared/utils'
   
   export default {
     title: '@e-toast/Select',
     component: Select,
     argTypes: {
-      options: objectControl,      
+      options: objectControl,
+      onChange: noControl(),    
     }
   } as Meta;
   
