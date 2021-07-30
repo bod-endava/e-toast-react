@@ -4,26 +4,35 @@ import Option from './option';
 
 export interface SelectProps {
   /** 
-  * Array with elements Select will display as a list
+  * Array with elements to be displayed
   */
   options?: any,
    /**
-   * onChange event handler. Triggers when an option is selected
+   * onChange event handler triggered when an option is selected. 
+   * The index of the option selected within the options array is stored on event.target.dataset.index 
    */
-    onChange: React.ChangeEventHandler<HTMLDivElement>
+    onChange: React.ChangeEventHandler<HTMLDivElement>,
+    /**
+   * Disable the interaction with the select. 
+   */
+    disabled?:boolean
 }
 
 const Select: React.FC<SelectProps> = ({
   options,
-  onChange
+  onChange,
+  disabled=false
 }) => {
 
+  const [selectClass, setSelectClass] = useState('eds-select eds-select__selected');
   const [displayOptions,setDisplayOptions] = useState(false);
   const [defaultOption, setDefaultOption] = useState(options[0]);
   const [iconClass,setIconClass] = useState('eds-select__selected__arrow__icon');
   
   const onSelectClick = () => {
-    displayOptions ? setDisplayOptions(false) : setDisplayOptions(true);    
+    if(!disabled){
+      displayOptions ? setDisplayOptions(false) : setDisplayOptions(true);
+    }    
   }
 
   const onOptionSelected = (event) => {    
@@ -33,6 +42,15 @@ const Select: React.FC<SelectProps> = ({
   }
 
   useEffect(() => {
+    if(disabled){
+      setSelectClass('eds-select eds-select__selected eds-select__selected__disabled');
+    }else{
+      setSelectClass('eds-select eds-select__selected');
+    }
+
+  },[disabled])
+  
+  useEffect(() => {
     if(displayOptions){
       setIconClass('eds-select__selected__arrow__icon eds-select__selected__arrow__icon--open');
     }else{
@@ -40,12 +58,14 @@ const Select: React.FC<SelectProps> = ({
     }
   },[displayOptions])
 
+
+
   return(
     <>
-      <div className={'eds-select eds-select__selected'} onClick={onSelectClick}>
-        <p className='eds-select__selected__content' id='selectDefaultOption'>{defaultOption}</p>
+      <div className={selectClass} onClick={onSelectClick}>
+        <p className={disabled ? 'eds-select__selected__content__disabled':'eds-select__selected__content'}>{defaultOption}</p>
         <span className='eds-select__selected__arrow'></span>    
-        <span className={iconClass}></span>
+        <span className={disabled ? 'eds-select__selected__arrow__icon eds-select__selected__arrow__icon__disabled' : iconClass}></span>
       </div>
       <Option options={options} display={displayOptions} onSelected={onOptionSelected}></Option>
     </>

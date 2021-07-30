@@ -3,7 +3,8 @@ import { Story, Meta } from '@storybook/react';
 import Select, { SelectProps } from '../src/Select';
 import {
     objectControl,
-    noControl
+    noControl,
+    booleanControl,
 }from './shared/utils'
   
   export default {
@@ -11,7 +12,8 @@ import {
     component: Select,
     argTypes: {
       options: objectControl,
-      onChange: noControl(),    
+      onChange: noControl(),
+      disabled: booleanControl(),    
     }
   } as Meta;
   
