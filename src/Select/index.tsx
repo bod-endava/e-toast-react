@@ -76,7 +76,6 @@ const Select: React.FC<SelectProps> = ({
     }
   },[disabled])
 
-
   return(
     <>
       <div className={selectClass} onClick={onSelectClick}>

@@ -15,8 +15,7 @@ import {
       onChange: noControl(),
       disabled: booleanControl(),    
     }
-  } as Meta;
-  
+  } as Meta;  
 
 const Template: Story<SelectProps> = (args) => <Select {...args}/>
 
