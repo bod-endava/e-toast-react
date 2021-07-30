@@ -25,6 +25,7 @@ const Select: React.FC<SelectProps> = ({
 }) => {
 
   const [selectClass, setSelectClass] = useState('eds-select eds-select__selected');
+  const [contentClass, setContentClass] = useState('eds-select__selected__content');
   const [displayOptions,setDisplayOptions] = useState(false);
   const [defaultOption, setDefaultOption] = useState(options[0]);
   const [iconClass,setIconClass] = useState('eds-select__selected__arrow__icon');
@@ -49,6 +50,14 @@ const Select: React.FC<SelectProps> = ({
     }
 
   },[disabled])
+
+  useEffect(() => {
+    if(disabled){
+      setContentClass('eds-select__selected__content__disabled');
+    }else{
+      setContentClass('eds-select__selected__content');
+    }
+  },[disabled])
   
   useEffect(() => {
     if(displayOptions){
@@ -63,7 +72,7 @@ const Select: React.FC<SelectProps> = ({
   return(
     <>
       <div className={selectClass} onClick={onSelectClick}>
-        <p className={disabled ? 'eds-select__selected__content__disabled':'eds-select__selected__content'}>{defaultOption}</p>
+        <p className={contentClass}>{defaultOption}</p>
         <span className='eds-select__selected__arrow'></span>    
         <span className={disabled ? 'eds-select__selected__arrow__icon eds-select__selected__arrow__icon__disabled' : iconClass}></span>
       </div>
