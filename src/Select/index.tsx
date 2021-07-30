@@ -16,19 +16,28 @@ export interface SelectProps {
    * Disable the interaction with the select. 
    */
     disabled?:boolean
+    /**
+   * Set the default option on the select. Selected has to be an item part of the options array, otherwise the 
+   * first item of the array will be set as default.   
+   */
+    selected?: string;  
 }
 
 const Select: React.FC<SelectProps> = ({
   options,
   onChange,
-  disabled=false
+  disabled=false,
+  selected
 }) => {
+
+  const controlled = selected !== undefined ? options.indexOf(selected) != -1 ? true : false : false;
 
   const [selectClass, setSelectClass] = useState('eds-select eds-select__selected');
   const [contentClass, setContentClass] = useState('eds-select__selected__content');
   const [displayOptions,setDisplayOptions] = useState(false);
-  const [defaultOption, setDefaultOption] = useState(options[0]);
+  const [defaultOption, setDefaultOption] = useState(controlled ? selected: options[0]);
   const [iconClass,setIconClass] = useState('eds-select__selected__arrow__icon');
+ 
   
   const onSelectClick = () => {
     if(!disabled){
