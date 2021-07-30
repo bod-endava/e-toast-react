@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import getClassName from 'getclassname';
 import Option from './option';
-
 
 export interface SelectProps {
   /** 
@@ -32,13 +32,25 @@ const Select: React.FC<SelectProps> = ({
 
   const controlled = selected !== undefined ? options.indexOf(selected) != -1 ? true : false : false;
 
-  const [selectClass, setSelectClass] = useState('eds-select eds-select__selected');
-  const [contentClass, setContentClass] = useState('eds-select__selected__content');
   const [displayOptions,setDisplayOptions] = useState(false);
   const [defaultOption, setDefaultOption] = useState(controlled ? selected: options[0]);
-  const [iconClass,setIconClass] = useState('eds-select__selected__arrow__icon');
- 
   
+  const selectClass = getClassName({
+    base: 'eds-select eds-select__selected',
+    '&__disabled': Boolean(disabled)   
+  });
+
+  const contentClass = getClassName({
+    base: 'eds-select__selected__content',
+    '&__disabled': Boolean(disabled)   
+  });
+
+  const iconClass = getClassName({
+    base: 'eds-select__selected__arrow__icon',
+    '&--open': Boolean(displayOptions),
+    '&__disabled': Boolean(disabled)   
+  });
+
   const onSelectClick = () => {
     if(!disabled){
       displayOptions ? setDisplayOptions(false) : setDisplayOptions(true);
@@ -50,40 +62,6 @@ const Select: React.FC<SelectProps> = ({
     setDisplayOptions(false);
     onChange(event);
   }
-
-  useEffect(() => {
-    if(disabled){
-      setSelectClass('eds-select eds-select__selected eds-select__selected__disabled');
-    }else{
-      setSelectClass('eds-select eds-select__selected');
-    }
-
-  },[disabled])
-
-  useEffect(() => {
-    if(disabled){
-      setContentClass('eds-select__selected__content__disabled');
-    }else{
-      setContentClass('eds-select__selected__content');
-    }
-  },[disabled])
-  
-  useEffect(() => {
-    if(displayOptions){
-      setIconClass('eds-select__selected__arrow__icon eds-select__selected__arrow__icon--open');
-    }else{
-      setIconClass('eds-select__selected__arrow__icon');
-    }
-  },[displayOptions])
-
-
-  useEffect(() => {
-    if(disabled){
-      setIconClass('eds-select__selected__arrow__icon eds-select__selected__arrow__icon__disabled');
-    }else{
-      setIconClass('eds-select__selected__arrow__icon');
-    }
-  },[disabled])
 
   return(
     <>
