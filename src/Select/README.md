@@ -27,9 +27,11 @@ import Select from '@e-toast/react/lib/Select';
 
 | Name       | Type   | Description                 |
 | ---------- | ------ | --------------------------- |
-| options   | `array` | List of elements Select will contain |
+| onChange | `function` | onChange event handler triggered when an option is selected. The index of the option selected within the options array is stored on event.target.dataset.index
 
 #### Optional props
 
 | Name         | Type       | Default    | Description               |
 | ------------ | ---------- | ---------- | ------------------------- |
+| options   | `array` | `['Small', 'Medium', 'Large']` | Array with elements to be displayed |
+| disable   | `boolean` | `false` | Disable the interaction with the select |
