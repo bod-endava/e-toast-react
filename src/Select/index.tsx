@@ -7,20 +7,20 @@ export interface SelectProps {
   * Array with elements to be displayed
   */
   options?: any,
-   /**
-   * onChange event handler triggered when an option is selected. 
-   * The index of the option selected within the options array is stored on event.target.dataset.index 
-   */
-    onChange: React.ChangeEventHandler<HTMLDivElement>,
-    /**
-   * Disable the interaction with the select. 
-   */
-    disabled?:boolean
-    /**
-   * Set the default option on the select. Selected has to be an item part of the options array, otherwise the 
-   * first item of the array will be set as default.   
-   */
-    selected?: string;  
+  /**
+  * onChange event handler triggered when an option is selected. 
+  * The index of the option selected within the options array is stored on event.target.dataset.index 
+  */
+  onChange: React.ChangeEventHandler<HTMLDivElement>,
+  /**
+  * Disable the interaction with the select. 
+  */
+  disabled?:boolean
+  /**
+  * Set the default option on the select. Selected has to be an item part of the options array, otherwise the 
+  * first item of the array will be set as default.   
+  */
+  selected?: string;  
 }
 
 const Select: React.FC<SelectProps> = ({
