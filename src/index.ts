@@ -5,4 +5,5 @@ export { default as Datepicker } from './Datepicker';
 export { default as FlexLayout } from './FlexLayout';
 export { default as NativeDatepicker } from './NativeDatepicker';
 export { default as Select } from './Select';
+export { default as TextArea } from './TextArea';
 export { default as TextField } from './TextField';
