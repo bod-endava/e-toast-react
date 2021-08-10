@@ -1059,10 +1059,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@e-toast/css@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@e-toast/css/-/css-1.0.1.tgz#26610dfd84c5686c6495c61611ff7f61c8a717d4"
-  integrity sha512-82G5SFqzYg93GaGvNlehAEguO0PDQkaIjtzC9++Y+npwDvYo8+4W+p+8NMM/xp3vqVC7P7O6vWuWqcSfzQHN5Q==
+"@e-toast/css@latest":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@e-toast/css/-/css-1.0.5.tgz#77ba413613790bbfd1773a5bd0be9649240e2cde"
+  integrity sha512-DyRfrctoV1JyEXrFHZ1HTmwDUKpk0P7hyCy5A+JCD38lcXIiTvExnNrJvAqLeyohGI0d740Q1bMYKGWelQ0k/A==
 
 "@emotion/cache@^10.0.27":
   version "10.0.29"
