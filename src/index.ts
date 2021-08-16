@@ -7,4 +7,5 @@ export { default as FlexLayout } from './FlexLayout';
 export { default as Form } from './Form';
 export { default as NativeDatepicker } from './NativeDatepicker';
 export { default as Select } from './Select';
+export { default as Tag } from './Tag';
 export { default as TextField } from './TextField';
