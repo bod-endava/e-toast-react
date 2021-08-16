@@ -1,5 +1,6 @@
 import getClassName from 'getclassname';
 import React, { useState } from 'react';
+import { FormAPI } from '../Form/API';
 import { Icons } from '../sharedTypes';
 
 interface TextFieldPropsWithoutRef {
@@ -36,6 +37,10 @@ interface TextFieldPropsWithoutRef {
    */
   inputProps?: React.ComponentPropsWithoutRef<"input">;
   /**
+   * Props to pass to the container of the input element
+   */
+  inputContainerProps?: React.ComponentPropsWithoutRef<"div">;
+  /**
    * The `placeholder` attribute to be passed to the underlying input element
    */
   placeholder?: string;
@@ -48,6 +53,11 @@ interface TextFieldPropsWithoutRef {
    * Initial value to be used for the input.
    */
   initialValue?: string;
+  /**
+   * **This prop is only used for automatic form handling should not be used directly**
+   * Form API object used to hook input to form state. Normally, this prop is passed automatically by the form.
+   */
+  formAPI?: FormAPI<any>;
   /**
    * onChange event handler. Triggers on every change
    */
@@ -75,9 +85,11 @@ const TextField = React.forwardRef<TextFieldInnerElement, TextFieldPropsWithoutR
   success=false,
   disabled=false,
   inputProps={},
+  inputContainerProps={},
   placeholder,
   value,
   initialValue,
+  formAPI,
   onChange,
   onIconClick,
 }, ref) => {
@@ -85,6 +97,7 @@ const TextField = React.forwardRef<TextFieldInnerElement, TextFieldPropsWithoutR
   const [innerValue, setInnerValue] = useState(initialValue)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    formAPI?.handleChange?.(e);
     onChange?.(e)
     !controlled && setInnerValue(e.target.value);
   }
@@ -114,7 +127,7 @@ const TextField = React.forwardRef<TextFieldInnerElement, TextFieldPropsWithoutR
   })
   const iconClass = `eds-icon ${icon} ${partialIconClass}`
 
-  return <div className={container}>
+  return <div className={container} {...inputContainerProps}>
     <div className={labelRoot}>
       {label && <label className={labelText} htmlFor={id || name || label}>
         {label}

@@ -13,12 +13,14 @@ export const parameters = {
       order: [
         "@e-toast",
         [
+          "Avatar",
           "Button",
           "Checkbox",
           "TextField",
           "FlexLayout",
           "Datepicker",
-          "NativeDatepicker"
+          "NativeDatepicker",
+          "Form"
         ]
       ],
     }

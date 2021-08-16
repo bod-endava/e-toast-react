@@ -1,17 +1,22 @@
 import React from 'react';
 import getClassName from 'getclassname';
+import { FormAPI } from '../Form/API';
 
 interface CheckboxPropsWithoutRef {
   /**
-   * id of the input. If not passed, it will fallback to the label
+   * The `id` attribute to be passed to the underlying input element. Will default to `name`, then `label` props
    */
   id?: string;
   /**
-   * text to be used for the checkbox. Required if no children is provided
+   * The `name` attribute to be passed to the underlying input element. Will default to `id`, then `label` props
+   */
+  name?: string;
+  /**
+   * Text to be used for the checkbox. Required if no children is provided
    */
   label?: string;
   /**
-   * label content to be used for the checkbox. Required if no label is provided
+   * Label content to be used for the checkbox. Required if no label is provided
    */
   children?: React.ReactNode;
   /**
@@ -44,6 +49,11 @@ interface CheckboxPropsWithoutRef {
    * Props to be passed down to the underlying div container
    */
   containerProps?: React.ComponentPropsWithoutRef<"div">;
+  /**
+   * **This prop is only used for automatic form handling should not be used directly**
+   * Form API object used to hook input to form state. Normally, this prop is passed automatically by the form.
+   */
+   formAPI?: FormAPI<any>;
 }
 
 export type CheckboxProps = CheckboxPropsWithoutRef & {
@@ -57,8 +67,10 @@ export type CheckboxInnerElement = HTMLInputElement
 const Checkbox = React.forwardRef<CheckboxInnerElement, CheckboxPropsWithoutRef>(({
   label,
   children,
-  id: rawId,
+  id,
+  name,
   checked,
+  formAPI,
   disabled=false,
   initialValue=false,
   onChange=()=>{},
@@ -69,9 +81,9 @@ const Checkbox = React.forwardRef<CheckboxInnerElement, CheckboxPropsWithoutRef>
 
   const controlled = checked !== undefined;
   const [innerChecked, setInnerChecked] = React.useState(initialValue)
-  const id = rawId || label;
 
   const handleChange = (e) => {
+    formAPI?.handleChange?.(e);
     onChange?.(e);
     !controlled && setInnerChecked(ckd => !ckd);
   }
@@ -82,7 +94,8 @@ const Checkbox = React.forwardRef<CheckboxInnerElement, CheckboxPropsWithoutRef>
 
   return <div className={containerCl} {...containerProps}>
     <input 
-      id={id} 
+      id={id || name || label} 
+      name={name || id || label}
       className={cl} 
       type="checkbox" 
       ref={ref} 
@@ -91,7 +104,7 @@ const Checkbox = React.forwardRef<CheckboxInnerElement, CheckboxPropsWithoutRef>
       onChange={handleChange} 
       {...inputProps}
     />
-    <label htmlFor={id} className={labelCl} {...labelProps}>{label || children}</label>
+    <label htmlFor={id || name || label} className={labelCl} {...labelProps}>{label || children}</label>
   </div>
 })
 
