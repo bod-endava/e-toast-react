@@ -2,21 +2,24 @@ import React from 'react';
 import getClassName from 'getclassname';
 
 export interface TextAreaProps {
-
+  hasIcon?: boolean;
+  icon?: string
   id?: string;
   isDisabled:boolean;
+  label?: string;
   name?: string;
-  hasIcon?: boolean;
 }
 
 const Padded = ({ children }) => <div style={{margin: "16px"}}> {children} </div>;
 
 const TextArea = (
   { 
-    id = "id",
-    name = "normal",
-    isDisabled = false,
     hasIcon = false,
+    icon = "calendar",
+    id = "id",
+    isDisabled = false,
+    label = "Placeholder",
+    name = "normal",
   }
 : TextAreaProps) => {
   const clTextArea = getClassName({
@@ -24,9 +27,13 @@ const TextArea = (
     "&--has-icon": hasIcon,
   });
 
+  const clIcon = getClassName({
+    base: "eds-icon",
+  });
+
   const clTextAreaIcon = getClassName({
-    base: "eds-icon"
-  })
+    base: "eds-outline-textarea__icon",
+  });
 
   return (
     <section>
@@ -36,11 +43,11 @@ const TextArea = (
             className={clTextArea}
             disabled={isDisabled}
             name={id || name}
+            placeholder={label}
           />
-          <span className={`${clTextAreaIcon}`}></span>
+          <span className={`${clIcon} ${clTextAreaIcon} ${icon}`}></span>
         </div>
       </Padded>
-      TextArea
     </section>
   )
 }
