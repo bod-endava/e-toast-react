@@ -2,50 +2,50 @@ import React from 'react';
 import getClassName from 'getclassname';
 
 export interface TextAreaProps {
-  hasIcon?: boolean;
   icon?: string
   id?: string;
-  isDisabled:boolean;
+  isDisabled: boolean;
   label?: string;
   name?: string;
+  variant?: string;
 }
 
 const Padded = ({ children }) => <div style={{margin: "16px"}}> {children} </div>;
 
 const TextArea = (
   { 
-    hasIcon = false,
-    icon = "calendar",
+    icon = "",
     id = "id",
     isDisabled = false,
     label = "Placeholder",
     name = "normal",
+    variant = "Outline",
   }
 : TextAreaProps) => {
+  const hasIcon = Boolean(icon);
   const clTextArea = getClassName({
     base: "eds-outline-textarea",
-    "&--has-icon": hasIcon,
   });
 
   const clIcon = getClassName({
     base: "eds-icon",
   });
 
-  const clTextAreaIcon = getClassName({
-    base: "eds-outline-textarea__icon",
-  });
+  const clTextAreaIcon = clTextArea.extend("&__icon");
 
   return (
     <section>
       <Padded>
-        <div className={`${clTextArea}__container`}>
+        <div className={hasIcon ? `${clTextArea}--has-icon ${clTextArea}__container` : `${clTextArea}__container`}>
           <textarea 
-            className={clTextArea}
+            className={hasIcon ? `${clTextArea}--has-icon ${clTextArea}` : clTextArea}
             disabled={isDisabled}
             name={id || name}
+            icon={icon}
             placeholder={label}
+            variant={variant}
           />
-          <span className={`${clIcon} ${clTextAreaIcon} ${icon}`}></span>
+          <span className={hasIcon ? `${clIcon} ${clTextAreaIcon} ${icon}` : `${icon}`}></span>
         </div>
       </Padded>
     </section>
