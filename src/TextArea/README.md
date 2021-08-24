@@ -2,7 +2,7 @@
 
 <hr>
 
-This is where the description will go
+A text area component.
 
 #### Import
 
@@ -15,20 +15,23 @@ import TextArea from '@e-toast/react/lib/TextArea';
 #### Usage
 
 ```jsx
-// Show me how to use it!
+<TextArea
+  disabled=false
+  name="a name"
+  icon="calendar"
+  placeholder="label"
+  variant="outline"
+/>
 ```
-
-#### Local Type Definitions
-
-| Name |  Definition | Description |
-| ---- | ----------- | ----------- |
-
-#### Required props
-
-| Name       | Type   | Description                 |
-| ---------- | ------ | --------------------------- |
 
 #### Optional props
 
 | Name         | Type       | Default    | Description               |
 | ------------ | ---------- | ---------- | ------------------------- |
+| icon         | `string`       | `undefined`    | The `icon` attribute to indicate if the text area should display an icon               |
+| id         | `string`       | `undefined`    | The `id` attribute to be passed to the text area component               |
+| isDisabled         | `boolean`       | `false`    | The `isDisabled` attribute to indicate if the text area should disabled
+               |
+| label         | `string`       | `undefined`    | The `label` attribute will be used as placeholder               |
+| name         | `string`       | `undefined`    | The `name` attribute is defined for the texarea element               |
+| variant         | `string`      | `Outline`    | The `variant` attribute determines the style of the text area.               |

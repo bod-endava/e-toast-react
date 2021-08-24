@@ -2,11 +2,30 @@ import React from 'react';
 import getClassName from 'getclassname';
 
 export interface TextAreaProps {
+  /**
+   * The `icon` attribute to indicate if the text area should display an icon
+   */
   icon?: string
+  /**
+   * The `id` attribute to be passed to the text area component
+   */
   id?: string;
+  /**
+   * The `isDisabled` attribute to indicate if the text area should disabled
+   */
   isDisabled: boolean;
+  /**
+   * The `label` attribute will be used as placeholder
+   */
   label?: string;
+  /**
+   * The `name` attribute is defined for the texarea element
+   */
   name?: string;
+  /**
+   * The `variant` attribute determines the style of the text area. Outline is
+   * the default value
+   */
   variant?: string;
 }
 
