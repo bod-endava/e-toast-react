@@ -9,3 +9,4 @@ export { default as NativeDatepicker } from './NativeDatepicker';
 export { default as Select } from './Select';
 export { default as Tag } from './Tag';
 export { default as TextField } from './TextField';
+export { default as PasswordField } from './PasswordField';
