@@ -29,8 +29,6 @@ export interface TextAreaProps {
   variant?: string;
 }
 
-const Padded = ({ children }) => <div style={{margin: "16px"}}> {children} </div>;
-
 const TextArea = (
   { 
     icon = "",
@@ -54,7 +52,6 @@ const TextArea = (
 
   return (
     <section>
-      <Padded>
         <div className={hasIcon ? `${clTextArea}--has-icon ${clTextArea}__container` : `${clTextArea}__container`}>
           <textarea 
             className={hasIcon ? `${clTextArea}--has-icon ${clTextArea}` : clTextArea}
@@ -66,7 +63,6 @@ const TextArea = (
           />
           <span className={hasIcon ? `${clIcon} ${clTextAreaIcon} ${icon}` : `${icon}`}></span>
         </div>
-      </Padded>
     </section>
   )
 }
