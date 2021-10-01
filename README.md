@@ -22,4 +22,4 @@ import { Button } from '@e-toast/react';
 import Button from '@e-toast/lib/Button';
 ```
 
-This library should be used with an implementation of ``@e-toast/css`` which needs to be imported before any component (normally in the entry point of your react application). Otherwise the components will have no style applied.
+This library should be used with an implementation of ```@e-toast/css``` which needs to be imported before any component (normally in the entry point of your react application). Otherwise the components will have no style applied.
