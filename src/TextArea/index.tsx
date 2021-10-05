@@ -19,7 +19,7 @@ export interface TextAreaProps {
    */
   label?: string;
   /**
-   * The `name` attribute is defined for the texarea element
+   * The `name` attribute is defined for the textarea element
    */
   name?: string;
   /**
@@ -30,7 +30,7 @@ export interface TextAreaProps {
 }
 
 const TextArea = (
-  { 
+  {
     icon = "",
     id = "id",
     isDisabled = false,
@@ -38,7 +38,7 @@ const TextArea = (
     name = "normal",
     variant = "Outline",
   }
-: TextAreaProps) => {
+    : TextAreaProps) => {
   const hasIcon = Boolean(icon);
   const clTextArea = getClassName({
     base: "eds-outline-textarea",
@@ -50,19 +50,21 @@ const TextArea = (
 
   const clTextAreaIcon = clTextArea.extend("&__icon");
 
+  // TODO: 'icon' and 'variant' attributes is not defined for HTMLTextAreaElement type 
+  // partial solution: use data-attribute to custom properties
   return (
     <section>
-        <div className={hasIcon ? `${clTextArea}--has-icon ${clTextArea}__container` : `${clTextArea}__container`}>
-          <textarea 
-            className={hasIcon ? `${clTextArea}--has-icon ${clTextArea}` : clTextArea}
-            disabled={isDisabled}
-            name={id || name}
-            icon={icon}
-            placeholder={label}
-            variant={variant}
-          />
-          <span className={hasIcon ? `${clIcon} ${clTextAreaIcon} ${icon}` : `${icon}`}></span>
-        </div>
+      <div className={hasIcon ? `${clTextArea}--has-icon ${clTextArea}__container` : `${clTextArea}__container`}>
+        <textarea
+          className={hasIcon ? `${clTextArea}--has-icon ${clTextArea}` : clTextArea}
+          data-icon={icon}
+          data-variant={variant}
+          disabled={isDisabled}
+          name={id || name}
+          placeholder={label}
+        />
+        <span className={hasIcon ? `${clIcon} ${clTextAreaIcon} ${icon}` : `${icon}`}></span>
+      </div>
     </section>
   )
 }
