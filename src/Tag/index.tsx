@@ -34,7 +34,7 @@ const Tag: React.FC<TagProps> = ((
     isDisabled = false,
     hasCloseAction = false,
     label,
-    onClick = () => {},
+    onClick = () => { },
     tagProps = {},
   }: TagProps
 ) => {
@@ -49,11 +49,13 @@ const Tag: React.FC<TagProps> = ((
 
   const clSuffix = clTag.extend('&__tag');
 
+  // TODO: disabled attribute is not defined for HTMLDivElement type 
+  // partial solution: use data-attribute to custom properties
   return (
     <div className={clTag}>
-      <div className={clSuffix} disabled={isDisabled} {...tagProps}>
+      <div className={clSuffix} data-disabled={isDisabled} {...tagProps}>
         {label}
-        <span className={clCloseAction} onClick={onClick}  />
+        <span className={clCloseAction} onClick={onClick} />
       </div>
     </div>
   )
