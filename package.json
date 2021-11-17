@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Jkierem/e-toast-ds/tree/develop/packages/react"
+    "url": "https://github.com/bod-endava/e-toast-react"
   },
   "files": [
     "lib"
@@ -26,8 +26,6 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "getclassname": "^1.0.9",
-    "react": "^17.0.2",
-    "react-dom": "17.0.2",
     "typescript": "^4.1.2"
   },
   "devDependencies": {
@@ -40,5 +38,9 @@
     "babel-loader": "^8.2.2",
     "plop": "^2.7.4",
     "rimraf": "^3.0.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "17.0.2"
   }
 }
