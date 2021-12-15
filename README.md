@@ -28,11 +28,11 @@ This library should be used with an implementation of ```@e-toast/css``` which n
 ## Unit Testing 
 
 This repo uses different tools for performing unit test in each component. 
-- (Jest)[https://jestjs.io/] 
-- (testing-library/dom)[https://testing-library.com/docs/dom-testing-library/intro]
-- (testing-library/jest-dom)[https://testing-library.com/docs/ecosystem-jest-dom]
-- (testing-library/react)[https://testing-library.com/docs/react-testing-library/intro]
-- (testing-library/user-event)[https://testing-library.com/docs/ecosystem-user-event/]
+- [Jest](https://jestjs.io/)
+- [testing-library/dom](https://testing-library.com/docs/dom-testing-library/intro)
+- [testing-library/jest-dom](https://testing-library.com/docs/ecosystem-jest-dom)
+- [testing-library/react](https://testing-library.com/docs/react-testing-library/intro)
+- [testing-library/user-event](https://testing-library.com/docs/ecosystem-user-event/)
 ### Running all the tests 
 ```bash
 yarn test 
