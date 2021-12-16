@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react';
-import NativeDatepicker, { NativeDatepickerProps } from '../src/NativeDatepicker'
-import { description, extendControl, objectControl } from './shared/utils';
+import NativeDatepicker, { NativeDatepickerProps } from '.'
+import { description, extendControl, objectControl } from '../shared/utils';
 
 export default {
   title: '@e-toast/NativeDatepicker',

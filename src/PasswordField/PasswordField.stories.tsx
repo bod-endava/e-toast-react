@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/react'
-import PasswordField, { PasswordFieldProps } from '../src/PasswordField'
-import { Icons } from './shared/IconOptions'
+import PasswordField, { PasswordFieldProps } from '.'
+import { Icons } from '../shared/IconOptions'
 import { 
   noControl,
   textControl,
   objectControl,
   booleanControl,
   selectWithOptional,
-} from './shared/utils'
+} from '../shared/utils'
 
 export default {
   title: "@e-toast/PasswordField",

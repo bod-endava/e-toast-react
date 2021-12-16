@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react'
-import TextArea, { TextAreaProps } from '../src/TextArea'
-import { booleanControl, noControl, textControl } from './shared/utils'
+import TextArea, { TextAreaProps } from '.'
+import { booleanControl, noControl, textControl } from '../shared/utils'
 
 export default {
   title: "@e-toast/TextArea",

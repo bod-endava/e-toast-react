@@ -1,8 +1,8 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import Button , { ButtonProps } from '../src/Button';
-import { ButtonVariants } from './shared/ButtonOptions'
-import { Sizes, Icons } from './shared/IconOptions'
+import Button , { ButtonProps } from '.';
+import { ButtonVariants } from '../shared/ButtonOptions'
+import { Sizes, Icons } from '../shared/IconOptions'
 import {
   selectWithOptional,
   radioWithOptional,
@@ -10,7 +10,7 @@ import {
   textControl,
   objectControl,
   booleanControl
-} from './shared/utils'
+} from '../shared/utils'
 
 export default {
   title: '@e-toast/Button',

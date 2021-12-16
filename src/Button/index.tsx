@@ -1,6 +1,6 @@
 import React from 'react';
 import getClassName from 'getclassname';
-import { Icons, Sizes } from "../sharedTypes"
+import { Icons, Sizes } from "../shared/types"
 import { FormAPI } from '../Form/API';
 
 export type ButtonVariants = "primary" | "outline" | "cta" | "text" | "icon"

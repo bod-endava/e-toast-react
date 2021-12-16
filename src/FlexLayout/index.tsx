@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactNode } from 'react';
-import { FlexDirection, JustifyContent, FlexWrap, AlignItems, AlignContent } from "../sharedTypes"
+import { FlexDirection, JustifyContent, FlexWrap, AlignItems, AlignContent } from "../shared/types"
 
 export type FlexLayoutProps = {
     /**
