@@ -6,7 +6,7 @@ import {
     noControl,
     booleanControl,
     textControl
-}from '../shared/utils'
+}from '../../stories/utils'
   
   export default {
     title: '@e-toast/Select',

@@ -7,7 +7,7 @@ import {
   textControl, 
   objectControl, 
   booleanControl 
-} from '../shared/utils'
+} from '../../stories/utils'
 
 export default {
   title: '@e-toast/Checkbox',

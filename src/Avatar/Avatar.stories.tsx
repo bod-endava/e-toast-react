@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import Avatar , { AvatarProps } from '.';
-import { textControl, colorControl, noControl, objectControl } from '../shared/utils';
+import { textControl, colorControl, noControl, objectControl } from '../../stories/utils';
 
 export default {
   title: "@e-toast/Avatar",

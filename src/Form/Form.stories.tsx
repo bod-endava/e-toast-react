@@ -6,7 +6,7 @@ import TextField from '../TextField'
 import Button from '../Button'
 import Datepicker from '../Datepicker'
 import Checkbox from '../Checkbox'
-import { description, extendControl, noControl, objectControl } from '../shared/utils';
+import { description, extendControl, noControl, objectControl } from '../../stories/utils';
 import { useState } from 'react';
 
 export default {
