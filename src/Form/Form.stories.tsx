@@ -1,12 +1,12 @@
 import { Meta } from '@storybook/react';
-import FlexLayout from '../src/FlexLayout';
-import Form, { FormAPI, FormProps } from '../src/Form';
-import FieldContainer from '../src/FieldContainer'
-import TextField from '../src/TextField'
-import Button from '../src/Button'
-import Datepicker from '../src/Datepicker'
-import Checkbox from '../src/Checkbox'
-import { description, extendControl, noControl, objectControl } from './shared/utils';
+import FlexLayout from '../FlexLayout';
+import Form, { FormAPI, FormProps } from '.';
+import FieldContainer from '../FieldContainer'
+import TextField from '../TextField'
+import Button from '../Button'
+import Datepicker from '../Datepicker'
+import Checkbox from '../Checkbox'
+import { description, extendControl, noControl, objectControl } from '../../stories/utils';
 import { useState } from 'react';
 
 export default {

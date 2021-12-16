@@ -10,6 +10,6 @@ module.exports = function babelPreset(
       isTestingEnv && [ require('@babel/preset-env').default, { targets: { node: 'current' } } ],
       [ require('@babel/preset-react').default, { development: isDevEnv || isTestingEnv, useBuiltIns: true } ],
       [ require('@babel/preset-typescript').default, { isTSX: true, allExtensions: true } ],
-    ]
+    ].filter(Boolean)
   }
 }

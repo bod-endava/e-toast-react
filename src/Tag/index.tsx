@@ -1,7 +1,7 @@
 import React from 'react';
 import getClassName from 'getclassname';
 
-interface TagProps {
+export interface TagProps {
   /**
    * The `close` attribute to be passed to the create a tag element with close action
    */

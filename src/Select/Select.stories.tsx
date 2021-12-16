@@ -1,12 +1,12 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import Select, { SelectProps } from '../src/Select';
+import Select, { SelectProps } from '.';
 import {
     objectControl,
     noControl,
     booleanControl,
     textControl
-}from './shared/utils'
+}from '../../stories/utils'
   
   export default {
     title: '@e-toast/Select',

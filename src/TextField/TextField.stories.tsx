@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/react'
-import TextField, { TextFieldProps } from '../src/TextField'
-import { Icons } from './shared/IconOptions'
+import TextField, { TextFieldProps } from '.'
+import { Icons } from '../../stories/IconOptions'
 import { 
   noControl,
   textControl,
   objectControl,
   booleanControl,
   selectWithOptional,
-} from './shared/utils'
+} from '../../stories/utils'
 
 export default {
   title: "@e-toast/TextField",

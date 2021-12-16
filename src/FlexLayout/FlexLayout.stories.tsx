@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import FlexLayout, { FlexLayoutProps } from '../src/FlexLayout';
-import {  AlignContent, AlignItems, FlexDirection, FlexWrap, JustifyContent } from './shared/FlexLayoutOptions'
+import FlexLayout, { FlexLayoutProps } from '.';
+import {  AlignContent, AlignItems, FlexDirection, FlexWrap, JustifyContent } from '../../stories/FlexLayoutOptions'
 
 import {
   noControl,
@@ -13,7 +13,7 @@ import {
   objectControl,
   extendControl,
   description
-} from './shared/utils'
+} from '../../stories/utils'
 
 const blockStyle: React.CSSProperties = {
   padding: '5px',

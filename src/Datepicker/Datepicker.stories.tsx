@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import Datepicker, { DatepickerProps } from '../src/Datepicker'
+import Datepicker, { DatepickerProps } from '.'
 import { 
   labels, 
   noControl, 
@@ -9,7 +9,7 @@ import {
   booleanControl, 
   disableControl, 
   radioWithOptional
-} from './shared/utils';
+} from '../../stories/utils';
 
 const argTypes = {
   initialValue: textControl(),

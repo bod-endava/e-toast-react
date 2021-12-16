@@ -1,13 +1,13 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import Checkbox , { CheckboxProps } from '../src/Checkbox';
+import Checkbox , { CheckboxProps } from '.';
 import { 
   radioWithOptional, 
   noControl, 
   textControl, 
   objectControl, 
   booleanControl 
-} from './shared/utils'
+} from '../../stories/utils'
 
 export default {
   title: '@e-toast/Checkbox',

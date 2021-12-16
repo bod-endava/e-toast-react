@@ -1,7 +1,7 @@
 import getClassName from 'getclassname';
 import React, { useState } from 'react';
 import { FormAPI } from '../Form/API';
-import { Icons } from '../sharedTypes';
+import { Icons } from '../../stories/types';
 
 interface TextFieldPropsWithoutRef {
   /**
