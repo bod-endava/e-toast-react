@@ -1,0 +1,25 @@
+name: e-toast-react-pipeline
+
+on:
+  push:
+    branches: 
+    - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: nodeJS version
+        run: node --version
+
+      - name: Install all packages
+        run: yarn install --frozen-lockfile
+      
+      - name: Build e-toast-react
+        run: yarn build
+      
+      - name: Test components 
+        run: yarn test
