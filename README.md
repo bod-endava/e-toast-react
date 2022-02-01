@@ -4,10 +4,10 @@ This contains the React implementation of e-toast.
 
 ## Instalation
 
+*IMPORTANT* this project uses `yarn` version `1.22.1` as package manager. Please avoid using any other package manager.
+
 ```bash
 yarn add @e-toast/react
-// or
-npm install @e-toast/react
 ```
 
 ## Usage
@@ -35,13 +35,9 @@ This repo uses different tools for performing unit test in each component.
 - [testing-library/user-event](https://testing-library.com/docs/ecosystem-user-event/)
 ### Running all the tests 
 ```bash
-yarn test 
-//or
-npm run test
+yarn test
 ```
 ### Running a test individually on _watch_ mode
 ```bash
 yarn test:focus "./path/to/my/unitTest.test.tsx"
-//or
-npm run test:focus "./path/to/my/unitTest.test.tsx"
 ```
