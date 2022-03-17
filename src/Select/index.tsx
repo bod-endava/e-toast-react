@@ -5,28 +5,9 @@ import { useClickOutsideDetector } from '../commons/hooks/useClickOutsideDetecto
 import { FormAPI } from '../Form';
 import { useEffect } from 'react';
 import { createEvent, OpaqueEventHandler } from '../commons/structures/opaque-event';
+import { OptionData, default as Option } from './Option';
 
 type ClassName = ReturnType<typeof getClassName>
-
-export interface OptionData {
-  /**
-   * Value used when option is selected. Required if neither text nor children are given.
-   */
-  value: string | number;
-  /**
-   * Text to be displayed. Defaults to `value` 
-   */
-  text: React.ReactNode;
-  /**
-   * Whether the option should be hidden or not. Defaults to false
-   */
-  hidden?: boolean
-  /**
-   * Event to trigger when an option is selected.
-   */
-  onClick?: (data: OptionData, event: React.MouseEvent<HTMLDivElement>) => void
-}
-
 export interface SelectProps {
   /**
    * Id of the select element. Required if name is not passed
@@ -70,32 +51,6 @@ export interface SelectProps {
    * Props passed down to the underlying div component
    */
   divProps?: React.ComponentPropsWithoutRef<"div">;
-}
-
-type OptionProps = Partial<OptionData> & {
-  /**
-  * Content to be displayed. Defaults to `value` and has less priority than `text`
-  */
-  children?: React.ReactNode;
-}
-
-const Option: React.FC<OptionProps> = (props) => {
-  const { onClick, children, ...info } = props;
-
-  const root = getClassName({
-    base: "eds-select__option",
-    "&--hidden": info.hidden
-  })
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => onClick?.({
-    ...info,
-    text: (info.text ?? info.value ?? children) as string | number,
-    value: (info.value ?? info.text ?? children) as string | number
-  }, e)
-
-  return <div className={root} onClick={handleClick}>
-    {info.text || children || info.value}
-  </div>
 }
 
 interface ArrowProps {
