@@ -1,79 +1,221 @@
-import React, { useState } from 'react';
+import React, { Children, useState } from 'react';
 import getClassName from 'getclassname';
-import Option from './option';
+import * as E from '../commons/structures/either'
+import { useClickOutsideDetector } from '../commons/hooks/useClickOutsideDetector';
+import { FormAPI } from '../Form';
+import { useEffect } from 'react';
+import { createEvent, OpaqueEventHandler } from '../commons/structures/opaque-event';
+
+type ClassName = ReturnType<typeof getClassName>
+
+export interface OptionData {
+  /**
+   * Value used when option is selected. Required if neither text nor children are given.
+   */
+  value: string | number;
+  /**
+   * Text to be displayed. Defaults to `value` 
+   */
+  text: React.ReactNode;
+  /**
+   * Whether the option should be hidden or not. Defaults to false
+   */
+  hidden?: boolean
+  /**
+   * Event to trigger when an option is selected.
+   */
+  onClick?: (data: OptionData, event: React.MouseEvent<HTMLDivElement>) => void
+}
 
 export interface SelectProps {
+  /**
+   * Id of the select element. Required if name is not passed
+   */
+  id?: string;
+  /**
+   * name of the selected element. Required if id is not passed. Has preference over id for form change event
+   */
+  name?: string;
   /** 
-  * Array with elements to be displayed
+  * Array with elements to be displayed. Required if no children are passed
   */
-  options?: any,
+  options?: string[] | OptionData[];
   /**
   * onChange event handler triggered when an option is selected. 
-  * The index of the option selected within the options array is stored on event.target.dataset.index 
   */
-  onChange: React.ChangeEventHandler<HTMLDivElement>,
+  onChange?: OpaqueEventHandler<number | string>;
   /**
   * Disable the interaction with the select. 
   */
-  disabled?:boolean
+  disabled?: boolean;
   /**
-  * Set the default option on the select. Selected has to be an item part of the options array, otherwise the 
-  * first item of the array will be set as default.   
+  * Set the current selected option. If there is no option with a value of selected, the first option is used instead  
   */
-  selected?: string;  
+  selected?: string | number;
+  /**
+   * Sets the initial selected value. Ignored if selected is passed
+   */
+  initialValue?: string | number;
+  /**
+   * Options to be displayed. Required if no options prop is passed. 
+   * Must be Select.Option components
+   */
+  children?: React.ReactNode;
+  /**
+   * **This prop is only used for automatic form handling should not be used directly**
+   * Form API object used to hook select to form state. Normally, this prop is passed automatically by the form.
+   */
+  formAPI?: FormAPI<any>;
+  /**
+   * Props passed down to the underlying div component
+   */
+  divProps?: React.ComponentPropsWithoutRef<"div">;
 }
 
-const Select: React.FC<SelectProps> = ({
-  options,
-  onChange,
-  disabled=false,
-  selected
-}) => {
+type OptionProps = Partial<OptionData> & {
+  /**
+  * Content to be displayed. Defaults to `value` and has less priority than `text`
+  */
+  children?: React.ReactNode;
+}
 
-  const controlled = selected !== undefined ? options.indexOf(selected) != -1 ? true : false : false;
+const Option: React.FC<OptionProps> = (props) => {
+  const { onClick, children, ...info } = props;
 
-  const [displayOptions,setDisplayOptions] = useState(false);
-  const [defaultOption, setDefaultOption] = useState(controlled ? selected: options[0]);
+  const root = getClassName({
+    base: "eds-select__option",
+    "&--hidden": info.hidden
+  })
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => onClick?.({
+    ...info,
+    text: (info.text ?? info.value ?? children) as string | number,
+    value: (info.value ?? info.text ?? children) as string | number
+  }, e)
+
+  return <div className={root} onClick={handleClick}>
+    {info.text || children || info.value}
+  </div>
+}
+
+interface ArrowProps {
+  open: boolean
+  className: ClassName
+}
+
+const Arrow = ({ className: root, open }: ArrowProps) => {
+  const icon = root.element("icon").recompute({
+    "&--open": open
+  })
+
+  return <span className={root}>
+    <span className={icon}></span>
+  </span>
+}
+
+type SelectComponent = React.FC<SelectProps> & {
+  Option: typeof Option
+}
+
+const isOption = (x: any): x is React.ReactElement<OptionData, typeof Option> => React.isValidElement(x) && x?.type === Option
+
+const getOptionsFromChildren = (children: React.ReactChildren): OptionData[] => {
+  return Children.toArray(children)
+    .map(child => isOption(child) ? child.props : undefined)
+    .filter((x: OptionData | undefined): x is OptionData => x !== undefined)
+}
+
+const wrapData = (data: string | OptionData): OptionData => typeof data === "string" 
+  ? ({ value: data, text: data }) : data
+
+const Select: SelectComponent = (props) => {
+  const {
+    options: rawOptions,
+    name, 
+    id,
+    onChange,
+    initialValue,
+    disabled=false,
+    selected,
+    formAPI,
+    divProps={},
+    children
+  } = props
+
+  const controlled = E.fromBoolean(Boolean((onChange && selected) || formAPI))
+  const options = rawOptions 
+    ? rawOptions.map(wrapData) 
+    : getOptionsFromChildren(children as React.ReactChildren)
+
+  const [open, setOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(
+    controlled
+    .map(() => options.find(({ value }) => value === selected) ?? options[0])
+    .onLeft(() => E
+      .fromNullish(initialValue)
+      .map(init => options.find(({ value }) => value === init) ?? options[0])
+      .onLeft(() => options[0])
+    )
+  );
+
+  useEffect(() => {
+    controlled.map(() => {
+      setSelectedOption(options.find(({ value }) => value === selected) ?? options[0])
+    })
+  }, [selected])
   
-  const selectClass = getClassName({
-    base: 'eds-select eds-select__selected',
-    '&__disabled': Boolean(disabled)   
-  });
+  const selectRef = useClickOutsideDetector<HTMLDivElement>(() => { setOpen(false) })
 
-  const contentClass = getClassName({
-    base: 'eds-select__selected__content',
-    '&__disabled': Boolean(disabled)   
-  });
+  const rootCl = getClassName({ 
+    base: "eds-select",
+    "&--disabled": disabled
+  })
 
-  const iconClass = getClassName({
-    base: 'eds-select__selected__arrow__icon',
-    '&--open': Boolean(displayOptions),
-    '&__disabled': Boolean(disabled)   
-  });
+  const selectedCl = rootCl.element("selected")
+  const selectedContentCl = selectedCl.element("content")
+  const selectedArrowCl = selectedCl.element("arrow")
 
-  const onSelectClick = () => {
-    if(!disabled){
-      displayOptions ? setDisplayOptions(false) : setDisplayOptions(true);
-    }    
+  const listCl = rootCl.element("list").recompute({ "&--open": open })
+
+  const handleClick = () => {
+    E.fromBoolean(!disabled)
+      .map(() => setOpen(x => !x))
   }
 
-  const onOptionSelected = (event) => {    
-    setDefaultOption(options[event.target.dataset.index]);
-    setDisplayOptions(false);
-    onChange(event);
+  const handleSelect = (target: OptionData) => {
+    const maybeEnabled = E.fromBoolean(!disabled)
+
+    maybeEnabled.map(() => {
+      const event = createEvent('select', `${name || id}`, target.value)
+      E.fromNullish(formAPI).map(api => api.handleChange(event as React.ChangeEvent<any>))
+      E.fromNullish(onChange).apply(event)
+      controlled.mapLeft(() => setSelectedOption(target))
+    })
   }
 
-  return(
-    <>
-      <div className={selectClass} onClick={onSelectClick}>
-        <p className={contentClass}>{defaultOption}</p>
-        <span className='eds-select__selected__arrow'></span>    
-        <span className={iconClass}></span>
-      </div>
-      <Option options={options} display={displayOptions} onSelected={onOptionSelected}></Option>
-    </>
-    
-  ) 
+  const renderOptions = () => {
+    return E.fromNullish(options)
+      .map(opts => opts.map((opt, idx) => <Option 
+        key={`${idx}-${opt.value}`}
+        text={opt.text}
+        value={opt.value}
+        hidden={false}
+        onClick={() => handleSelect(opt)}
+      />))
+      .onLeft(() => children ? [<>{children}</>] : [<></>])
+  }
+
+  return <div ref={selectRef} className={rootCl} onClick={handleClick} {...divProps}>
+    <span className={selectedCl}>
+      <span className={selectedContentCl}>{selectedOption.text}</span>
+      <Arrow className={selectedArrowCl} open={open}/>
+    </span>
+    <div className={listCl}>
+      {renderOptions()}
+    </div>
+  </div>
 }
+
+Select.Option = Option
 
 export default Select

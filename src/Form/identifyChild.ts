@@ -1,6 +1,7 @@
 import Button from "../Button";
 import Checkbox from "../Checkbox";
 import Datepicker from "../Datepicker";
+import Select from "../Select";
 import TextField from "../TextField";
 
 const or = <T>(...preds: ((a: T) => boolean)[]) => (a: T): boolean => {
@@ -12,7 +13,7 @@ const buttonTypes = ["button" , "submit" , "reset"] as const;
 const checkableTypes = ["checkbox", "radio"] as const;
 const chanegableTypes = ["color" , "date" , "datetime-local" , "email" , "file" 
 , "hidden" , "image" , "month" , "number" , "password" , "range" 
-, "search" , "tel" , "text" , "time" , "url" , "week"] as const;
+, "search" , "tel" , "text" , "time" , "url" , "week", "select"] as const;
 
 type ButtonType = UnionFromConst<typeof buttonTypes>
 type CheckableType = UnionFromConst<typeof checkableTypes>
@@ -26,10 +27,17 @@ export const isHTMLFormType = (type: string): type is HTMLFormType => or(isButto
 export const isHTMLFormComponent = ({type}) => type === "input" || type === "button";
 
 const isToastButton = (type: any) => type === Button;
+const isToastSelect = (type: any) => type === Select
 const isToastCheckbox = (type: any) => type === Checkbox;
 const isToastTextField = (type: any) => type === TextField;
 const isToastDatepicker = (type: any) => type === Datepicker;
-export const isToastFormComponent = ({type}: any) => or(isToastButton,isToastCheckbox,isToastTextField,isToastDatepicker)(type)
+export const isToastFormComponent = ({type}: any) => or(
+  isToastButton,
+  isToastSelect,
+  isToastCheckbox,
+  isToastTextField,
+  isToastDatepicker,
+)(type)
 export const isFancyComponent = (c: any) => Boolean(c?.type?.toasty);
 
 export const getIdentifier = (comp: any) => comp?.props?.name || comp?.props?.id
