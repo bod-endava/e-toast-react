@@ -1,3 +1,5 @@
+import * as E from '../commons/structures/either'
+
 const padded = (n: number): string => n < 10 ? `0${n}` : `${n}`;
 const genNumber = (start: number, amount: number, delta: number ) => {
   const res: number[] = []
@@ -43,45 +45,21 @@ export const getCellData = (today: Date, weekdayNames: (n: number) => string ): 
     return weekdays.concat(beforePadding).concat(days).concat(afterPadding);
 }
 
-type Either<L,R> = {
-  map<U>(fn: (r: R) => U): Either<L,U>;
-  onLeft<U>(fn: (l: L) => U): U | R;
-}
-
-
-const Right = <L,R>(x: R): Either<L,R> => ({
-  map<U>(fn: (x: R) => U){
-    return Right(fn(x))
-  },
-  onLeft(){
-    return x;
-  }
-})
-
-const Left = <L,R>(x: L): Either<L,R> => ({
-  map(){
-    return Left(x)
-  },
-  onLeft<U>(fn: (x: L) => U){
-    return fn(x);
-  }
-})
-
 export interface DateFormatter {
   parseDate(str: string, format?: string): Date | undefined;
   formatDate(date: Date, format?: string): string; 
 }
 
-export const parseDateWith = (formatter: DateFormatter) => (str: string): Either<string,Date> => {
+export const parseDateWith = (formatter: DateFormatter) => (str: string): E.Either<string,Date> => {
   try {
     const res = formatter.parseDate(str);
     if( res === undefined ){
-      return Left(str)
+      return E.left(str)
     } else {
-      return Right(res)
+      return E.right(res)
     }
   } catch {
-    return Left(str)
+    return E.left(str)
   }
 }
 

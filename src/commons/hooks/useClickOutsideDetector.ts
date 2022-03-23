@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-export const useClickOutsideDetector = <T extends HTMLElement>(elementRef: React.MutableRefObject<T | null>, fn: (ref:  React.MutableRefObject<T>) => void) => {
+export const useClickOutsideDetector = <T extends HTMLElement>(fn: (ref:  React.MutableRefObject<T>) => void) => {
+  const elementRef: React.MutableRefObject<T | null> = useRef(null)
+  
   useEffect(() => {
     function clickHandler(e){
       if(elementRef.current && !elementRef.current.contains(e.target)){
@@ -10,4 +12,6 @@ export const useClickOutsideDetector = <T extends HTMLElement>(elementRef: React
     document.addEventListener("mousedown", clickHandler);
     return () => document.removeEventListener("mousedown",clickHandler)
   },[])
+
+  return elementRef
 }

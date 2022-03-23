@@ -8,6 +8,7 @@ import Datepicker from '../Datepicker'
 import Checkbox from '../Checkbox'
 import { description, extendControl, noControl, objectControl } from '../../stories/utils';
 import { useState } from 'react';
+import Select from '../Select';
 
 export default {
   title: '@e-toast/Form',
@@ -31,7 +32,7 @@ export const Manual = ({ initialValues, ...args }: FormProps<typeof initialValue
   return <Form
     initialValues={initialValues}
     {...args}
-    onSubmit={({ firstName, lastName, remember}) => alert(`Hi there ${firstName} ${lastName}! ${remember ? "I'll remember you..." : ""}`)}
+    onSubmit={({ firstName, lastName, remember, type }) => alert(`Hi there ${firstName} ${lastName}! You are a type ${type}. ${remember ? "I'll remember you..." : ""}`)}
   >
     {
       (formAPI: FormAPI<typeof initialValues>) => {
@@ -39,6 +40,7 @@ export const Manual = ({ initialValues, ...args }: FormProps<typeof initialValue
           <TextField name="firstName" label="First Name" value={formAPI.getField("firstName")} onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>
           <TextField name="lastName" label="Last Name" value={formAPI.getField("lastName")} onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>
           <Checkbox name="remember" id="manual" label="Remember me" checked={formAPI.getField("remember")} onChange={formAPI.handleChange} />
+          <Select name="type" selected={formAPI.getField("type")} options={["one","two","three"]} onChange={formAPI.handleChange} divProps={{ style: { margin: "8px 0px 16px" }}}/>
           <Button label="Submit" onClick={formAPI.handleSubmit} buttonProps={{ style: { marginBottom: "16px" }}}/>
           <Button label="Reset" variant="cta" onClick={formAPI.handleReset} buttonProps={{ style: { marginBottom: "16px" }}}/>
           <div>
@@ -60,6 +62,7 @@ Manual.args = {
     firstName: "Juan",
     lastName: "",
     remember: false,
+    type: "one"
   }
 }
 Manual.parameters = {
@@ -79,6 +82,7 @@ Manual.parameters = {
     + `\n      <TextField name="firstName" label="First Name" onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>`
     + `\n      <TextField name="lastName" label="Last Name" onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>`
     + `\n      <Checkbox name="remember" label="Remember me" onChange={formAPI.handleChange} />`
+    + `\n      <Select name="type" selected={formAPI.getField("type")} options={["one","two","three"]} onChange={formAPI.handleChange} divProps={{ style: { margin: "8px 0px 16px" }}}/>`
     + `\n      <Button label="Submit" onClick={formAPI.handleSubmit} buttonProps={{ style: { marginBottom: "16px" }}}/>`
     + `\n      <Button label="Reset" onClick={formAPI.handleReset} buttonProps={{ style: { marginBottom: "16px" }}}/>`
     + `\n      <div>`
@@ -103,12 +107,13 @@ export const Auto = ({ initialValues, ...args }: FormProps<typeof initialValues>
     initialValues={initialValues}
     {...args}
     onChange={setValues}
-    onSubmit={({ firstName, lastName, remember}) => alert(`Hi there ${firstName} ${lastName}! ${remember ? "I'll remember you..." : ""}`)}
+    onSubmit={({ firstName, lastName, remember, type }) => alert(`Hi there ${firstName} ${lastName}! You are a type ${type}. ${remember ? "I'll remember you..." : ""}`)}
   >
     <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>
       <TextField name="firstName" label="First Name" inputProps={{ style: { marginBottom: "16px" }}}/>
       <TextField name="lastName" label="Last Name" inputProps={{ style: { marginBottom: "16px" }}}/>
       <Checkbox name="remember" label="Remember me" />
+      <Select name="type" options={["one", "two", "three"]} divProps={{ style: { margin: "8px 0px 16px" }}}/>
       <Button label="Submit" buttonProps={{ style: { marginBottom: "16px" }}}/>
       <Button type="reset" label="Reset" variant="cta" buttonProps={{ style: { marginBottom: "16px" }}}/>
       <div>
@@ -128,6 +133,7 @@ Auto.args = {
     firstName: "Juan",
     lastName: "",
     remember: false,
+    type: "one"
   }
 }
 Auto.parameters = {
