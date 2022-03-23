@@ -24,7 +24,9 @@ const Template: Story<SelectProps> = (args) => <Select {...args} />
 export const Controlled = Template.bind({})
 Controlled.args = {
   selected: 'Medium',
-  options: ['Small', 'Medium', 'Large']
+  onChange: () => {},
+  disabled: false,
+  options: ['Small', 'Medium', 'Large'],
 }
 
 export const Uncontrolled = Template.bind({})
