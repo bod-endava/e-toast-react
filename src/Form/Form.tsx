@@ -141,6 +141,7 @@ const Form = <T extends {}>({
     if (isToastFormComponent(child) || isFancyComponent(child)) {
       props.value = state[id];
       props.checked = state[id];
+      props.selected = state[id];
       props.formAPI = API;
       if (id in initialValues) {
         props.initialValue = initialValues[id];

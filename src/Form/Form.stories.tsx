@@ -1,7 +1,6 @@
 import { Meta } from '@storybook/react';
 import { description, extendControl, noControl, objectControl } from '../../stories/utils';
 import { useState } from 'react';
-import Select from '../Select';
 
 // TODO: Check why barrel pattern is not working
 import Button from '../Button/Button'
@@ -11,6 +10,7 @@ import FieldContainer from '../FieldContainer/FieldContainer'
 import FlexLayout from '../FlexLayout/FlexLayout';
 import Form, { FormAPI, FormProps } from './Form';
 import TextField from '../TextField/TextField'
+import Select from '../Select/Select';
 
 export default {
   title: '@e-toast/Form',
@@ -19,7 +19,7 @@ export default {
     children: extendControl(
       noControl(),
       description(
-        `Form content to render\n`+
+        `Form content to render\n` +
         `**For demo purposes this prop is disabled**`
       )
     ),
@@ -39,12 +39,12 @@ export const Manual = ({ initialValues, ...args }: FormProps<typeof initialValue
     {
       (formAPI: FormAPI<typeof initialValues>) => {
         return <FlexLayout flexDirection="column">
-          <TextField name="firstName" label="First Name" value={formAPI.getField("firstName")} onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>
-          <TextField name="lastName" label="Last Name" value={formAPI.getField("lastName")} onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>
+          <TextField name="firstName" label="First Name" value={formAPI.getField("firstName")} onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" } }} />
+          <TextField name="lastName" label="Last Name" value={formAPI.getField("lastName")} onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" } }} />
           <Checkbox name="remember" id="manual" label="Remember me" checked={formAPI.getField("remember")} onChange={formAPI.handleChange} />
-          <Select name="type" selected={formAPI.getField("type")} options={["one","two","three"]} onChange={formAPI.handleChange} divProps={{ style: { margin: "8px 0px 16px" }}}/>
-          <Button label="Submit" onClick={formAPI.handleSubmit} buttonProps={{ style: { marginBottom: "16px" }}}/>
-          <Button label="Reset" variant="cta" onClick={formAPI.handleReset} buttonProps={{ style: { marginBottom: "16px" }}}/>
+          <Select name="type" selected={formAPI.getField("type")} options={["one", "two", "three"]} onChange={formAPI.handleChange} divProps={{ style: { margin: "8px 0px 16px" } }} />
+          <Button label="Submit" onClick={formAPI.handleSubmit} buttonProps={{ style: { marginBottom: "16px" } }} />
+          <Button label="Reset" variant="cta" onClick={formAPI.handleReset} buttonProps={{ style: { marginBottom: "16px" } }} />
           <div>
             Current form values:
             <ul>
@@ -70,35 +70,35 @@ Manual.args = {
 Manual.parameters = {
   docs: {
     source: {
-      code: 
-         `<Form`
-    + `\n  initialValues={{`
-    + `\n    firstName: "",`
-    + `\n    lastName: ""`
-    + `\n  }}`
-    + `\n  onSubmit={({ firstName, lastName, remember}) => alert(\`Hi there \${firstName} \${lastName}! \${remember ? "I'll remember you..." : ""}\`)}`
-    + `\n>`
-    + `\n{`
-    + `\n  (formAPI: FormAPI<typeof initialValues>) => {`
-    + `\n    return <FlexLayout flexDirection="column">`
-    + `\n      <TextField name="firstName" label="First Name" onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>`
-    + `\n      <TextField name="lastName" label="Last Name" onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>`
-    + `\n      <Checkbox name="remember" label="Remember me" onChange={formAPI.handleChange} />`
-    + `\n      <Select name="type" selected={formAPI.getField("type")} options={["one","two","three"]} onChange={formAPI.handleChange} divProps={{ style: { margin: "8px 0px 16px" }}}/>`
-    + `\n      <Button label="Submit" onClick={formAPI.handleSubmit} buttonProps={{ style: { marginBottom: "16px" }}}/>`
-    + `\n      <Button label="Reset" onClick={formAPI.handleReset} buttonProps={{ style: { marginBottom: "16px" }}}/>`
-    + `\n      <div>`
-    + `\n        Current form values:`
-    + `\n        <ul>`
-    + `\n          {Object.keys(formAPI.values).map(key => {`
-    + `\n            return <li key={key}>{key}: "{formAPI.values[key]}"</li>`
-    + `\n          })}`
-    + `\n        </ul>`
-    + `\n      </div>`
-    + `\n    </FlexLayout>`
-    + `\n  }`
-    + `\n}`
-    + `\n</Form>`
+      code:
+        `<Form`
+        + `\n  initialValues={{`
+        + `\n    firstName: "",`
+        + `\n    lastName: ""`
+        + `\n  }}`
+        + `\n  onSubmit={({ firstName, lastName, remember}) => alert(\`Hi there \${firstName} \${lastName}! \${remember ? "I'll remember you..." : ""}\`)}`
+        + `\n>`
+        + `\n{`
+        + `\n  (formAPI: FormAPI<typeof initialValues>) => {`
+        + `\n    return <FlexLayout flexDirection="column">`
+        + `\n      <TextField name="firstName" label="First Name" onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>`
+        + `\n      <TextField name="lastName" label="Last Name" onChange={formAPI.handleChange} inputProps={{ style: { marginBottom: "16px" }}}/>`
+        + `\n      <Checkbox name="remember" label="Remember me" onChange={formAPI.handleChange} />`
+        + `\n      <Select name="type" selected={formAPI.getField("type")} options={["one","two","three"]} onChange={formAPI.handleChange} divProps={{ style: { margin: "8px 0px 16px" }}}/>`
+        + `\n      <Button label="Submit" onClick={formAPI.handleSubmit} buttonProps={{ style: { marginBottom: "16px" }}}/>`
+        + `\n      <Button label="Reset" onClick={formAPI.handleReset} buttonProps={{ style: { marginBottom: "16px" }}}/>`
+        + `\n      <div>`
+        + `\n        Current form values:`
+        + `\n        <ul>`
+        + `\n          {Object.keys(formAPI.values).map(key => {`
+        + `\n            return <li key={key}>{key}: "{formAPI.values[key]}"</li>`
+        + `\n          })}`
+        + `\n        </ul>`
+        + `\n      </div>`
+        + `\n    </FlexLayout>`
+        + `\n  }`
+        + `\n}`
+        + `\n</Form>`
     }
   }
 }
@@ -112,12 +112,12 @@ export const Auto = ({ initialValues, ...args }: FormProps<typeof initialValues>
     onSubmit={({ firstName, lastName, remember, type }) => alert(`Hi there ${firstName} ${lastName}! You are a type ${type}. ${remember ? "I'll remember you..." : ""}`)}
   >
     <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>
-      <TextField name="firstName" label="First Name" inputProps={{ style: { marginBottom: "16px" }}}/>
-      <TextField name="lastName" label="Last Name" inputProps={{ style: { marginBottom: "16px" }}}/>
+      <TextField name="firstName" label="First Name" inputProps={{ style: { marginBottom: "16px" } }} />
+      <TextField name="lastName" label="Last Name" inputProps={{ style: { marginBottom: "16px" } }} />
       <Checkbox name="remember" label="Remember me" />
-      <Select name="type" options={["one", "two", "three"]} divProps={{ style: { margin: "8px 0px 16px" }}}/>
-      <Button label="Submit" buttonProps={{ style: { marginBottom: "16px" }}}/>
-      <Button type="reset" label="Reset" variant="cta" buttonProps={{ style: { marginBottom: "16px" }}}/>
+      <Select name="type" options={["one", "two", "three"]} divProps={{ style: { margin: "8px 0px 16px" } }} />
+      <Button label="Submit" buttonProps={{ style: { marginBottom: "16px" } }} />
+      <Button type="reset" label="Reset" variant="cta" buttonProps={{ style: { marginBottom: "16px" } }} />
       <div>
         Current form values:
         <ul>
@@ -141,32 +141,32 @@ Auto.args = {
 Auto.parameters = {
   docs: {
     source: {
-      code: 
+      code:
         `const [values, setValues] = useState({ firstName: "", lastName: "" });`
-        +`\n<Form`
-        +`\n  initialValues={{`
-        +`\n    firstName: "",`
-        +`\n    lastName: ""`
-        +`\n  }}`
-        +`\n  onChange={setValues}`
+        + `\n<Form`
+        + `\n  initialValues={{`
+        + `\n    firstName: "",`
+        + `\n    lastName: ""`
+        + `\n  }}`
+        + `\n  onChange={setValues}`
         + `\n  onSubmit={({ firstName, lastName, remember}) => alert(\`Hi there \${firstName} \${lastName}! \${remember ? "I'll remember you..." : ""}\`)}`
-        +`\n>`
-        +`\n  <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>`
-        +`\n    <TextField name="firstName" label="First Name" inputProps={{ style: { marginBottom: "16px" }}}/>`
-        +`\n    <TextField name="lastName" label="Last Name" inputProps={{ style: { marginBottom: "16px" }}}/>`
-        +`\n    <Checkbox name="remember" label="Remember me" />`
-        +`\n    <Button type="submit" label="Submit" buttonProps={{ style: { marginBottom: "16px" }}}/>`
-        +`\n    <Button type="reset" label="Reset" buttonProps={{ style: { marginBottom: "16px" }}}/>`
-        +`\n    <div>`
-        +`\n      Current form values:`
-        +`\n      <ul>`
-        +`\n        {Object.keys(values).map(key => {`
-        +`\n          return <li key={key}>{key}: {values[key]}</li>`
-        +`\n        })}`
-        +`\n      </ul>`
-        +`\n    </div>`
-        +`\n  </FieldContainer>`
-        +`\n</Form>`
+        + `\n>`
+        + `\n  <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>`
+        + `\n    <TextField name="firstName" label="First Name" inputProps={{ style: { marginBottom: "16px" }}}/>`
+        + `\n    <TextField name="lastName" label="Last Name" inputProps={{ style: { marginBottom: "16px" }}}/>`
+        + `\n    <Checkbox name="remember" label="Remember me" />`
+        + `\n    <Button type="submit" label="Submit" buttonProps={{ style: { marginBottom: "16px" }}}/>`
+        + `\n    <Button type="reset" label="Reset" buttonProps={{ style: { marginBottom: "16px" }}}/>`
+        + `\n    <div>`
+        + `\n      Current form values:`
+        + `\n      <ul>`
+        + `\n        {Object.keys(values).map(key => {`
+        + `\n          return <li key={key}>{key}: {values[key]}</li>`
+        + `\n        })}`
+        + `\n      </ul>`
+        + `\n    </div>`
+        + `\n  </FieldContainer>`
+        + `\n</Form>`
     }
   }
 }
@@ -186,9 +186,9 @@ export const Custom = ({ initialValues }) => {
         return <>
           <FlexLayout alignContent="center">
             <div style={{ marginRight: "8px" }}>
-              <Datepicker 
+              <Datepicker
                 initialValue={formAPI.initialValues["someDate"]}
-                onChange={(str) => formAPI.setField("someDate",str)}
+                onChange={(str) => formAPI.setField("someDate", str)}
               />
             </div>
             <Button label="Submit" onClick={formAPI.handleSubmit} />
@@ -212,29 +212,29 @@ Custom.parameters = {
   docs: {
     source: {
       code:
-      `const [last, setLast] = useState("(undefined)")`
-      +`\n<Form`
-      +`\n  initialValues={initialValues}`
-      +`\n  onSubmit={data => setLast(data.someDate)}`
-      +`\n>`
-      +`\n{(formAPI: FormAPI<typeof initialValues>) => {`
-      +`\n  return <>`
-      +`\n    <FlexLayout alignContent="center">`
-      +`\n      <div style={{ marginRight: "8px" }}>`
-      +`\n        <Datepicker `
-      +`\n          initialValue={formAPI.initialValues["someDate"]}`
-      +`\n          onChange={(str) => formAPI.setField("someDate",str)}`
-      +`\n        />`
-      +`\n      </div>`
-      +`\n      <Button label="Submit" onClick={formAPI.handleSubmit} />`
-      +`\n    </FlexLayout>`
-      +`\n    <ul>`
-      +`\n      <li>Current value : {formAPI.getField("someDate")}</li>`
-      +`\n      <li>Last submitted: {last}</li>`
-      +`\n    </ul>`
-      +`\n  </>`
-      +`\n}}`
-      +`\n</Form>`
+        `const [last, setLast] = useState("(undefined)")`
+        + `\n<Form`
+        + `\n  initialValues={initialValues}`
+        + `\n  onSubmit={data => setLast(data.someDate)}`
+        + `\n>`
+        + `\n{(formAPI: FormAPI<typeof initialValues>) => {`
+        + `\n  return <>`
+        + `\n    <FlexLayout alignContent="center">`
+        + `\n      <div style={{ marginRight: "8px" }}>`
+        + `\n        <Datepicker `
+        + `\n          initialValue={formAPI.initialValues["someDate"]}`
+        + `\n          onChange={(str) => formAPI.setField("someDate",str)}`
+        + `\n        />`
+        + `\n      </div>`
+        + `\n      <Button label="Submit" onClick={formAPI.handleSubmit} />`
+        + `\n    </FlexLayout>`
+        + `\n    <ul>`
+        + `\n      <li>Current value : {formAPI.getField("someDate")}</li>`
+        + `\n      <li>Last submitted: {last}</li>`
+        + `\n    </ul>`
+        + `\n  </>`
+        + `\n}}`
+        + `\n</Form>`
     }
   }
 }
@@ -255,19 +255,19 @@ export const FieldContainerExample = ({ initialValues, ...args }) => {
       initialValues={initialValues}
     >
       <FieldContainer>
-        {(formAPI: FormAPI<typeof initialValues>) => 
-          <TextField 
-            name="firstName" 
-            label="Using manual approach" 
+        {(formAPI: FormAPI<typeof initialValues>) =>
+          <TextField
+            name="firstName"
+            label="Using manual approach"
             value={formAPI.getField("firstName")}
             initialValue={formAPI.initialValues["firstName"]}
-            onChange={formAPI.handleChange} 
-            inputProps={{ style: { marginBottom: "16px" }}}
+            onChange={formAPI.handleChange}
+            inputProps={{ style: { marginBottom: "16px" } }}
           />
         }
       </FieldContainer>
       <FieldContainer as="div" componentProps={{ style: { marginBotton: "8px" } }}>
-        <TextField name="lastName" label="Using automatic approach"/>
+        <TextField name="lastName" label="Using automatic approach" />
       </FieldContainer>
       <FieldContainer>
         <FieldContainer>
@@ -282,13 +282,13 @@ export const FieldContainerExample = ({ initialValues, ...args }) => {
           </FieldContainer>
         </FieldContainer>
       </FieldContainer>
-      <Button label="Submit"/>
+      <Button label="Submit" />
     </Form>
   </div>
 }
 FieldContainerExample.storyName = "Field Containers"
-FieldContainerExample.args = { 
-  initialValues : {
+FieldContainerExample.args = {
+  initialValues: {
     firstName: "Juan",
     lastName: "",
   }
@@ -296,40 +296,40 @@ FieldContainerExample.args = {
 FieldContainerExample.parameters = {
   docs: {
     source: {
-      code: 
-      `<Form`
-      +`\n  initialValues={initialValues}`
-      +`\n>`
-      +`\n  <FieldContainer>`
-      +`\n    {(formAPI: FormAPI<typeof initialValues>) => `
-      +`\n      <TextField `
-      +`\n        name="firstName" `
-      +`\n        label="Using manual approach" `
-      +`\n        value={formAPI.getField("firstName")}`
-      +`\n        initialValue={formAPI.initialValues["firstName"]}`
-      +`\n        onChange={formAPI.handleChange} `
-      +`\n        inputProps={{ style: { marginBottom: "16px" }}}`
-      +`\n      />`
-      +`\n    }`
-      +`\n  </FieldContainer>`
-      +`\n  <FieldContainer as="div" componentProps={{ style: { marginBotton: "8px" } }}>`
-      +`\n    <TextField name="lastName" label="Using automatic approach"/>`
-      +`\n  </FieldContainer>`
-      +`\n  <FieldContainer>`
-      +`\n    <FieldContainer>`
-      +`\n      <FieldContainer>`
-      +`\n        <FieldContainer>`
-      +`\n          {(formAPI: FormAPI<typeof initialValues>) => {`
-      +`\n            return <>`
-      +`\n              <p>Current Full Name: {formAPI.getField("firstName")} {formAPI.getField("lastName")}</p>`
-      +`\n            </>`
-      +`\n          }}`
-      +`\n        </FieldContainer>`
-      +`\n      </FieldContainer>`
-      +`\n    </FieldContainer>`
-      +`\n  </FieldContainer>`
-      +`\n  <Button label="Submit"/>`
-      +`\n</Form>`
+      code:
+        `<Form`
+        + `\n  initialValues={initialValues}`
+        + `\n>`
+        + `\n  <FieldContainer>`
+        + `\n    {(formAPI: FormAPI<typeof initialValues>) => `
+        + `\n      <TextField `
+        + `\n        name="firstName" `
+        + `\n        label="Using manual approach" `
+        + `\n        value={formAPI.getField("firstName")}`
+        + `\n        initialValue={formAPI.initialValues["firstName"]}`
+        + `\n        onChange={formAPI.handleChange} `
+        + `\n        inputProps={{ style: { marginBottom: "16px" }}}`
+        + `\n      />`
+        + `\n    }`
+        + `\n  </FieldContainer>`
+        + `\n  <FieldContainer as="div" componentProps={{ style: { marginBotton: "8px" } }}>`
+        + `\n    <TextField name="lastName" label="Using automatic approach"/>`
+        + `\n  </FieldContainer>`
+        + `\n  <FieldContainer>`
+        + `\n    <FieldContainer>`
+        + `\n      <FieldContainer>`
+        + `\n        <FieldContainer>`
+        + `\n          {(formAPI: FormAPI<typeof initialValues>) => {`
+        + `\n            return <>`
+        + `\n              <p>Current Full Name: {formAPI.getField("firstName")} {formAPI.getField("lastName")}</p>`
+        + `\n            </>`
+        + `\n          }}`
+        + `\n        </FieldContainer>`
+        + `\n      </FieldContainer>`
+        + `\n    </FieldContainer>`
+        + `\n  </FieldContainer>`
+        + `\n  <Button label="Submit"/>`
+        + `\n</Form>`
     }
   }
 }
@@ -344,7 +344,7 @@ export const UsingHTML = ({ initialValues, ...args }) => {
     >
       <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>
         <label htmlFor="firstName">Name</label>
-        <input name="firstName" type="text"/>
+        <input name="firstName" type="text" />
         <input type="submit" />
       </FieldContainer>
     </Form>
@@ -356,16 +356,16 @@ UsingHTML.parameters = {
   docs: {
     source: {
       code:
-       `<Form`
-      +`\n  {...args}`
-      +`\n  initialValues={initialValues}`
-      +`\n>`
-      +`\n  <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>`
-      +`\n    <label htmlFor="firstName">Name</label>`
-      +`\n    <input name="firstName" type="text"/>`
-      +`\n    <input type="submit" />`
-      +`\n  </FieldContainer>`
-      +`\n</Form>`
+        `<Form`
+        + `\n  {...args}`
+        + `\n  initialValues={initialValues}`
+        + `\n>`
+        + `\n  <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>`
+        + `\n    <label htmlFor="firstName">Name</label>`
+        + `\n    <input name="firstName" type="text"/>`
+        + `\n    <input type="submit" />`
+        + `\n  </FieldContainer>`
+        + `\n</Form>`
     }
   }
 }
@@ -381,9 +381,9 @@ export const UsingFancy = ({ initialValues, ...args }) => {
   return <>
     <p>Using the manual approach is recommended when using custom components</p>
     <p>
-      For those who want to feel fancy and use automatic form state hook up feature, 
-      you can add a truthy "toasty" attribute to the component class or function to tell 
-      etoast to treat the component as an etoast form component and it will pass all the 
+      For those who want to feel fancy and use automatic form state hook up feature,
+      you can add a truthy "toasty" attribute to the component class or function to tell
+      etoast to treat the component as an etoast form component and it will pass all the
       props it would pass to any other etoast form component
     </p>
     <Form
@@ -392,8 +392,8 @@ export const UsingFancy = ({ initialValues, ...args }) => {
     >
       <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>
         <Fancy />
-        <TextField name="firstName" label="Name" inputContainerProps={{ style: { marginTop: "16px" }}}/>
-        <Button type="submit" label="Submit" buttonProps={{ style: { marginTop: "8px" } }}/>
+        <TextField name="firstName" label="Name" inputContainerProps={{ style: { marginTop: "16px" } }} />
+        <Button type="submit" label="Submit" buttonProps={{ style: { marginTop: "8px" } }} />
       </FieldContainer>
     </Form>
   </>
@@ -405,21 +405,21 @@ UsingFancy.parameters = {
     source: {
       code:
         `const Fancy = ({ formAPI }: any) => {`
-        +`\n  return <div>`
-        +`\n    I'm a fancy form component. I can see the form state: {formAPI.getField("firstName")}`
-        +`\n  </div>`
-        +`\n}`
-        +`\nFancy.toasty = true;\n`
-        +`\n<Form`
-        +`\n  {...args}`
-        +`\n  initialValues={initialValues}`
-        +`\n>`
-        +`\n  <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>`
-        +`\n    <Fancy />`
-        +`\n    <TextField name="firstName" label="Name" inputContainerProps={{ style: { marginTop: "16px" }}}/>`
-        +`\n    <Button type="submit" label="Submit" buttonProps={{ style: { marginTop: "8px" } }}/>`
-        +`\n  </FieldContainer>`
-        +`\n</Form>`
+        + `\n  return <div>`
+        + `\n    I'm a fancy form component. I can see the form state: {formAPI.getField("firstName")}`
+        + `\n  </div>`
+        + `\n}`
+        + `\nFancy.toasty = true;\n`
+        + `\n<Form`
+        + `\n  {...args}`
+        + `\n  initialValues={initialValues}`
+        + `\n>`
+        + `\n  <FieldContainer as={FlexLayout} componentProps={{ flexDirection: "column" }}>`
+        + `\n    <Fancy />`
+        + `\n    <TextField name="firstName" label="Name" inputContainerProps={{ style: { marginTop: "16px" }}}/>`
+        + `\n    <Button type="submit" label="Submit" buttonProps={{ style: { marginTop: "8px" } }}/>`
+        + `\n  </FieldContainer>`
+        + `\n</Form>`
     }
   }
 }

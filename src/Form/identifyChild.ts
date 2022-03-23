@@ -1,8 +1,10 @@
-import Button from "../Button";
-import Checkbox from "../Checkbox";
-import Datepicker from "../Datepicker";
-import Select from "../Select";
-import TextField from "../TextField";
+
+// TODO: Check why barrel pattern is not working
+import Button from "../Button/Button";
+import Checkbox from "../Checkbox/Checkbox";
+import Datepicker from "../Datepicker/Datepicker";
+import Select from "../Select/Select";
+import TextField from "../TextField/TextField";
 
 const or = <T>(...preds: ((a: T) => boolean)[]) => (a: T): boolean => {
   return preds.some(pred => pred(a));

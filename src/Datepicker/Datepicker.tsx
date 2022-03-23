@@ -1,7 +1,7 @@
 import getClassName from 'getclassname';
-import React, { ChangeEvent, useMemo, useRef, useState } from 'react';
+import React, { ChangeEvent, useMemo, useState } from 'react';
 import { FormAPI } from '../Form/API';
-import { useClickOutsideDetector } from './date-hooks';
+import { useClickOutsideDetector } from '../commons/hooks/useClickOutsideDetector';
 import {
   defaultMonthNames,
   defaultWeekdayNames,
@@ -170,8 +170,7 @@ const Datepicker = React.forwardRef<DatepickerInnerElement, DatepickerPropsWitho
   const months = useMemo(() => callOrAccess(rawMonths), [rawMonths])
   const weekdays = useMemo(() => callOrAccess(rawWeekdays), [rawWeekdays])
 
-  const calendarRef = useRef(null);
-  useClickOutsideDetector(calendarRef, () => setCalendarVisibility(vis => vis ? !vis : vis))
+  const calendarRef = useClickOutsideDetector<HTMLDivElement>(() => setCalendarVisibility(false))
 
   const datepickerClass = getClassName({ base: "eds-datepicker" });
   const labelClass = datepickerClass.extend("&__label")
