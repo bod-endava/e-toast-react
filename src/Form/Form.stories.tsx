@@ -1,13 +1,15 @@
 import { Meta } from '@storybook/react';
-import FlexLayout from '../FlexLayout';
-import Form, { FormAPI, FormProps } from '.';
-import FieldContainer from '../FieldContainer'
-import TextField from '../TextField'
-import Button from '../Button'
-import Datepicker from '../Datepicker'
-import Checkbox from '../Checkbox'
 import { description, extendControl, noControl, objectControl } from '../../stories/utils';
 import { useState } from 'react';
+
+// TODO: Check why barrel pattern is not working
+import Button from '../Button/Button'
+import Checkbox from '../Checkbox/Checkbox'
+import Datepicker from '../Datepicker/Datepicker'
+import FieldContainer from '../FieldContainer/FieldContainer'
+import FlexLayout from '../FlexLayout/FlexLayout';
+import Form, { FormAPI, FormProps } from './Form';
+import TextField from '../TextField/TextField'
 
 export default {
   title: '@e-toast/Form',

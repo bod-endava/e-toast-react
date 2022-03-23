@@ -1,12 +1,12 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import Checkbox , { CheckboxProps } from '.';
-import { 
-  radioWithOptional, 
-  noControl, 
-  textControl, 
-  objectControl, 
-  booleanControl 
+import Checkbox, { CheckboxProps } from './Checkbox';
+import {
+  radioWithOptional,
+  noControl,
+  textControl,
+  objectControl,
+  booleanControl
 } from '../../stories/utils'
 
 export default {
@@ -17,7 +17,7 @@ export default {
     label: textControl(),
     disabled: booleanControl(),
     initialValue: booleanControl(),
-    checked: radioWithOptional([ true, false ]),
+    checked: radioWithOptional([true, false]),
     inputProps: objectControl(),
     labelProps: objectControl(),
     containerProps: objectControl(),

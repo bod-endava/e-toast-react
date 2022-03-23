@@ -1,6 +1,6 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-import Tag, { TagProps } from ".";
+import Tag, { TagProps } from "./Tag";
 
 export default {
   title: "@e-toast/Tag",

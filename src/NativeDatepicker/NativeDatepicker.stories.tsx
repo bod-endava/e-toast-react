@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import NativeDatepicker, { NativeDatepickerProps } from '.'
+import NativeDatepicker, { NativeDatepickerProps } from './NativeDatepicker'
 import { description, extendControl, objectControl } from '../../stories/utils';
 
 export default {

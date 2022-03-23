@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import Avatar , { AvatarProps } from '.';
+import Avatar , { AvatarProps } from './Avatar';
 import { textControl, colorControl, noControl, objectControl } from '../../stories/utils';
 
 export default {

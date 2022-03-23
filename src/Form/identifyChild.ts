@@ -1,7 +1,7 @@
-import Button from "../Button";
-import Checkbox from "../Checkbox";
-import Datepicker from "../Datepicker";
-import TextField from "../TextField";
+import Button from "../Button/Button";
+import Checkbox from "../Checkbox/Checkbox";
+import Datepicker from "../Datepicker/Datepicker";
+import TextField from "../TextField/TextField";
 
 const or = <T>(...preds: ((a: T) => boolean)[]) => (a: T): boolean => {
   return preds.some(pred => pred(a));

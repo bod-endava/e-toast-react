@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/react';
-import Datepicker, { DatepickerProps } from '.'
-import { 
-  labels, 
-  noControl, 
+import Datepicker, { DatepickerProps } from './Datepicker'
+import {
+  labels,
+  noControl,
   textControl,
-  objectControl, 
-  extendControl, 
-  booleanControl, 
-  disableControl, 
+  objectControl,
+  extendControl,
+  booleanControl,
+  disableControl,
   radioWithOptional
 } from '../../stories/utils';
 
@@ -19,7 +19,7 @@ const argTypes = {
   disabled: booleanControl(),
   weekdays: objectControl(),
   months: objectControl(),
-  format: textControl(),
+  formatDate: textControl(),
   placeholder: textControl(),
   onChange: noControl(),
   inputProps: objectControl()
@@ -37,12 +37,12 @@ Default.argTypes = argTypes
 
 export const ChangeNames = Template.bind({})
 ChangeNames.args = {
-  weekdays: ["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+  weekdays: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
   months: [
-    "Enero","Febrero","Marzo",
-    "Abril","Mayo","Junio",
-    "Julio","Agosto","Septiembre",
-    "Octubre","Noviembre","Diciembre"
+    "Enero", "Febrero", "Marzo",
+    "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre",
+    "Octubre", "Noviembre", "Diciembre"
   ]
 }
 ChangeNames.argTypes = argTypes
@@ -57,10 +57,10 @@ WithLabel.argTypes = argTypes
 
 export const CustomFormatter: Story<DatepickerProps> = (args) => <Datepicker {...args} />
 CustomFormatter.args = {}
-CustomFormatter.parameters = { controls: { include: ['format','onChange'] } };
+CustomFormatter.parameters = { controls: { include: ['format', 'onChange'] } };
 CustomFormatter.argTypes = {
   format: extendControl(
-    radioWithOptional([ "DD/MM/YY", "MM/DD/YY", "DD/MM/YYYY", "YYYY-MM-DD", "Year: YYYY", "YYYYy MMm DDd" ]),
+    radioWithOptional(["DD/MM/YY", "MM/DD/YY", "DD/MM/YYYY", "YYYY-MM-DD", "Year: YYYY", "YYYYy MMm DDd"]),
     labels({
       undefined: `No Formatter (undefined, defaults to DD/MM/YY)`,
     })

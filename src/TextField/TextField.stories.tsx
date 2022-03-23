@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react'
-import TextField, { TextFieldProps } from '.'
+import TextField, { TextFieldProps } from './TextField'
 import { Icons } from '../../stories/IconOptions'
-import { 
+import {
   noControl,
   textControl,
   objectControl,
@@ -29,7 +29,7 @@ export default {
   }
 } as Meta
 
-const Template: Story<TextFieldProps> = (args) => <TextField {...args}/>
+const Template: Story<TextFieldProps> = (args) => <TextField {...args} />
 
 export const Controlled = Template.bind({})
 Controlled.args = {

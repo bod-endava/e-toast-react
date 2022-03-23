@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FormAPI } from '../Form/API';
 import { Icons } from '../../stories/types';
 
-interface PasswordFieldPropsWithoutRef {
+interface TextFieldPropsWithoutRef {
   /**
    * The `id` attribute to be passed to the underlying input element. Will default to `name`, then `label` props
    */
@@ -68,15 +68,15 @@ interface PasswordFieldPropsWithoutRef {
   onIconClick?: React.MouseEventHandler<HTMLSpanElement>;
 }
 
-export type PasswordFieldProps = PasswordFieldPropsWithoutRef & {
+export type TextFieldProps = TextFieldPropsWithoutRef & {
   /**
    * Ref to the inner input component
    */
   ref?: React.ForwardedRef<HTMLInputElement>;
 }
-export type PasswordFieldInnerElement = HTMLInputElement
+export type TextFieldInnerElement = HTMLInputElement
 
-const PasswordField = React.forwardRef<PasswordFieldInnerElement, PasswordFieldPropsWithoutRef>(({
+const TextField = React.forwardRef<TextFieldInnerElement, TextFieldPropsWithoutRef>(({
   id,
   label,
   name,
@@ -138,7 +138,7 @@ const PasswordField = React.forwardRef<PasswordFieldInnerElement, PasswordFieldP
     </div>
     <div>
       <input
-        type="password"
+        type="text"
         id={id || name || label}
         name={name || id || label}
         ref={ref}
@@ -154,4 +154,4 @@ const PasswordField = React.forwardRef<PasswordFieldInnerElement, PasswordFieldP
   </div>
 })
 
-export default PasswordField
+export default TextField

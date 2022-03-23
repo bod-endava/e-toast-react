@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import Toggle, {ToggleProps}  from '.';
+import Toggle, {ToggleProps}  from './Toggle';
 import {
     noControl,
     textControl,

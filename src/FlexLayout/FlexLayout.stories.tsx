@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import FlexLayout, { FlexLayoutProps } from '.';
+import FlexLayout, { FlexLayoutProps } from './FlexLayout';
 import {  AlignContent, AlignItems, FlexDirection, FlexWrap, JustifyContent } from '../../stories/FlexLayoutOptions'
 
 import {
