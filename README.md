@@ -3,11 +3,30 @@
 This contains the React implementation of e-toast.
 
 ## 🏗️ Instalation
-
-*IMPORTANT* this project uses `yarn` version `1.22.1` as package manager. Please avoid using any other package manager.
+ > this project uses `yarn` version `1.22.1` as package manager. Please avoid using any other package manager.
 
 ```bash
 yarn add @e-toast/react
+```
+
+Install dependencies using `yarn`
+
+```
+yarn i
+```
+
+To run storybook execute:
+
+```
+yarn run storybook
+```
+
+Open your browser on http://localhost:6006.
+
+To create components execute:
+
+```
+yarn generate
 ```
 
 ## 🧰 Tech Stack
@@ -40,6 +59,22 @@ import Button from '@e-toast/lib/Button';
 
 This library should be used with an implementation of ```@e-toast/css``` which needs to be imported before any component (normally in the entry point of your react application). Otherwise the components will have no style applied.
 
+## Guidelines
+
+When creating components keep some things in mind:
+
+  - Think on how a consumer will use the component
+  - Make it as open as possible
+  - Allow props to the inner html as an object with a clear name (check Button component for an example)
+  - Allow refs by forwarding the ref where it makes sense (use the generator for component with ref for an example)
+  - Some prop types might not make much sense right now (see size prop in Button) but are done thinking in case a new value is needed
+  - Use unions to limit values of props instead of just a huge type like string or number where possible
+  - Keep props as simple as possible
+  - Shared types should go into the sharedTypes folder and exposed in the index.ts file
+  - Export your types! this is so the consumer can use them
+  - Use the generated file as an example on how to write your component! that should answer how you should write required/optional props, forward refs, and how to export the component
+  - To enable storybook auto docgen, destructuring the prop paramenter and typing the component with React.FC is necessary (Lookup the button component)
+  - Please create a README.md for the component. Look at the Button component for an example.
 
 ## 🧪 Unit Testing
 
