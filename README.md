@@ -18,13 +18,12 @@ yarn add @e-toast/react
 - Jest v27.4.3
 
 ## 📁 Folder Structure
-Please follow the [guidelines](https://twitter.com/housecor/status/1493947989877997571?s=20&t=47Knp8NaM3KOzADGxkTH0w) suggested by Cory House:
+ we are based on Cory's [guidelines](https://twitter.com/housecor/status/1493947989877997571?s=20&t=47Knp8NaM3KOzADGxkTH0w).
 
 1. Button.tsx - component
 2. Button.types.ts - TS types
 3. Button.test.ts - Jest + testing-library unit tests
 4. Button.stories.tsx - Storybook stories
-5. ~Button.module.scss - CSS module~ (Replaced by e-toast/css)
 6. index.tsx - Re-exports ([barrel](https://trusz.github.io/posts/barrel-pattern-in-typescript/))
 
 ## ✍️ Usage
@@ -44,7 +43,7 @@ This library should be used with an implementation of ```@e-toast/css``` which n
 
 ## 🧪 Unit Testing
 
-This repo uses different tools for performing unit test in each component. 
+This repo uses different tools for performing unit test in each component.
 - [Jest](https://jestjs.io/)
 - [testing-library/dom](https://testing-library.com/docs/dom-testing-library/intro)
 - [testing-library/jest-dom](https://testing-library.com/docs/ecosystem-jest-dom)
