@@ -12,7 +12,7 @@ yarn add @e-toast/react
 Install dependencies using `yarn`
 
 ```
-yarn i
+yarn install
 ```
 
 To run storybook execute:
