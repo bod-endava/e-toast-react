@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react'
+import { Story, Meta } from '@storybook/react';
 import TextField, { TextFieldProps } from './TextField'
 import { Icons } from '../../commons/stories/Icons.options'
 import {

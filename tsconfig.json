@@ -31,7 +31,7 @@
     "**/*.test.ts",
     "**/*.test.tsx",
     "**/*.stories.tsx",
-    "./src/setupTests.ts",
+    "src/**",
     "src/commons/stories/**"
   ],
   "files": ["src/components/index.ts"]

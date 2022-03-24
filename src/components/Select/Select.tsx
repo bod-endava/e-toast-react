@@ -1,9 +1,9 @@
-import React, { Children, useState } from 'react';
+import React, { Children, useState, useEffect } from 'react';
 import getClassName from 'getclassname';
+
 import * as E from '../../commons/structures/either'
 import { useClickOutsideDetector } from '../../commons/hooks/useClickOutsideDetector';
-import { FormAPI } from '../Form';
-import { useEffect } from 'react';
+import { FormAPI } from '../Form/Form';
 import { createEvent, OpaqueEventHandler } from '../../commons/structures/opaque-event';
 import { OptionData, default as Option } from './Option';
 
@@ -98,7 +98,10 @@ const Select: SelectComponent = (props) => {
   } = props
 
   const controlled = E.fromBoolean(Boolean((onChange && selected) || formAPI))
+
+  // TS2349: This expression is not callable. rawOptions.map(wrapData)
   const options = rawOptions
+    //@ts-ignore
     ? rawOptions.map(wrapData)
     : getOptionsFromChildren(children as React.ReactChildren)
 
