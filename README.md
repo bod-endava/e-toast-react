@@ -18,7 +18,7 @@ yarn install
 To run storybook execute:
 
 ```
-yarn run storybook
+yarn storybook
 ```
 
 Open your browser on http://localhost:6006.

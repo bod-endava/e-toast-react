@@ -15,12 +15,12 @@
   ],
   "scripts": {
     "build": "tsc --build \"./tsconfig.json\"",
-    "test": "jest",
-    "test:focus": "jest --testPathPattern --watch",
     "clean": "rimraf ./lib",
     "generate": "plop",
     "storybook": "start-storybook -p 6006",
-    "storybook:build": "build-storybook"
+    "storybook:build": "build-storybook",
+    "test": "jest",
+    "test:focus": "jest --testPathPattern --watch"
   },
   "dependencies": {
     "@e-toast/react": "^0.1.0-alpha",
