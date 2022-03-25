@@ -43,7 +43,8 @@ yarn generate
 2. Button.types.ts - TS types
 3. Button.test.ts - Jest + testing-library unit tests
 4. Button.stories.tsx - Storybook stories
-6. index.tsx - Re-exports ([barrel](https://trusz.github.io/posts/barrel-pattern-in-typescript/))
+5. index.tsx - Re-exports ([barrel](https://trusz.github.io/posts/barrel-pattern-in-typescript/))
+6. README.md - Documentation to indicate how to use the component
 
 ## ✍️ Usage
 
@@ -54,7 +55,7 @@ The components can be imported in one of two ways:
 ```javascript
 import { Button } from '@e-toast/react';
 //or
-import Button from '@e-toast/lib/Button';
+import { Button } from '@e-toast/lib/components/Button'
 ```
 
 This library should be used with an implementation of ```@e-toast/css``` which needs to be imported before any component (normally in the entry point of your react application). Otherwise the components will have no style applied.
