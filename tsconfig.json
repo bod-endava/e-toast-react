@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["es2015", "dom"],
+    "lib": [
+      "es2015",
+      "dom"
+    ],
     "outDir": "lib",
     "jsx": "react",
     "module": "commonjs",
@@ -25,14 +28,16 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src"],
+  "include": [
+    "src/",
+    "src/components/**/index.tsx",
+    "src/components/index.tsx"
+  ],
   "exclude": [
     "node_modules",
     "**/*.test.ts",
     "**/*.test.tsx",
     "**/*.stories.tsx",
-    "./src/setupTests.ts",
-    "./stories/**"
+    "src/commons/stories/**"
   ],
-  "files": ["./src/index.ts"]
 }

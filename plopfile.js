@@ -34,17 +34,17 @@ module.exports = function(plop){
     actions: [
       {
         type: 'add',
-        path: 'src/{{properCase name}}/index.tsx',
+        path: 'src/components/{{properCase name}}/{{properCase name}}.tsx',
         templateFile: 'templates/component.hbs'
       },
       {
         type: 'add',
-        path: 'src/{{properCase name}}/README.md',
+        path: 'src/components/{{properCase name}}/README.md',
         templateFile: 'templates/readme.hbs'
       },
       {
         type: 'modify',
-        path: './src/index.ts',
+        path: './src/components/index.ts',
         transform: addImport(plop)
       }
     ]
@@ -67,17 +67,17 @@ module.exports = function(plop){
     actions: [
       {
         type: 'add',
-        path: 'src/{{properCase name}}/index.tsx',
+        path: 'src/components/{{properCase name}}/{{properCase name}}.tsx',
         templateFile: 'templates/component-with-ref.hbs'
       },
       {
         type: 'add',
-        path: 'src/{{properCase name}}/README.md',
+        path: 'src/components/{{properCase name}}/README.md',
         templateFile: 'templates/readme.hbs'
       },
       {
         type: 'modify',
-        path: './src/index.ts',
+        path: './src/components/index.ts',
         transform: addImport(plop)
       }
     ]
